@@ -35,11 +35,21 @@ def user():
     """
     Save the user name
     """
+    user_age = int(input("\nPlease enter your age to start the game: "))
+    if user_age < 18:
+        print("\nYou are to young to risk your life, wait until you are older")
+        menu()
+    else:
+        pass
+        
     user_name = input("\nPlease enter your name to start the game: ")
     print(f"\nWelcome, {user_name}! You are about to embark on a mission of utmost secrecy and importance.\n")
 
     # Pass the user_name to the email
     email(user_name)
+
+    # Decryption challenge
+    rotor_hint = rotor_position_challenge()
 
 def instructions():
     """
@@ -68,7 +78,6 @@ def setup_enigma_machine():
         ring_settings=[1, 20, 11],
         plugboard_settings='AV BS CG DL FU HZ IN KM OW RX'
     )
-
     return machine
 
 def encrypt_string(machine, plaintext):
@@ -78,7 +87,6 @@ def encrypt_string(machine, plaintext):
     # Set the initial rotor position
     machine.set_display('WXC')  
     ciphertext = machine.process_text(plaintext)
-
     return ciphertext
 
 
@@ -109,6 +117,24 @@ def email(user_name):
     print("You've received an encrypted email:\n")
     print(email)
     #print("\nSome parts of this email are encrypted. Can you decrypt them to uncover the secret message and stop the WWIII?")
+
+
+def rotor_position_challenge():
+    """
+    User Challenges to decrypt the enigma machine
+    """
+    print("\nRotor Position Challenge:")
+    print("Decrypt the following code to find the initial rotor positions: 'LXF'")
+    # https://www.toppr.com/ask/
+    print("Hint: It's a famous three-letter agency.")
+    answer = input("\nYour answer: ").upper()
+
+    if answer == "FBI":
+        print("Correct! The initial rotor positions are 'F', 'B', 'I'.")
+        return "FBI"
+    else:
+        print("Incorrect. The correct answer was 'FBI'. No hints for rotor positions.")
+        return None
 
 def main():
     """
