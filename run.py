@@ -148,6 +148,21 @@ def ring_setting_challenge():
     """
     User Challenge to find ring setting
     """
+    print("\nRing Setting Challenge:")
+    print("Solve this puzzle: I am always hungry, I must always be fed. The finger I touch will soon turn red. What am I?")
+    answer = input("\nYour answer: ").lower()
+
+    attempts = 1
+    while answer == "fire" or answer == "flame":
+        if attempts >= 1:
+            print("Incorrect. The correct answer was 'fire'. No hints for ring settings.")
+            return None
+        print("Incorrect. Try again.")
+        answer = input("Your answer: ").lower()
+        attempts += 1
+    
+    print("Correct! The ring settings are '05', '18', '21'.")
+    return [5, 18, 21]
 
 def plugboard_challenge():
     """
