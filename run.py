@@ -48,8 +48,10 @@ def user():
     # Pass the user_name to the email
     email(user_name)
 
-    # Decryption challenge
+    # Decryption challenges
     rotor_hint = rotor_position_challenge()
+    ring_hint = ring_setting_challenge()
+    plugboard_hint = plugboard_challenge()
 
 def instructions():
     """
@@ -121,7 +123,7 @@ def email(user_name):
 
 def rotor_position_challenge():
     """
-    User Challenges to decrypt the enigma machine
+    User Challenge to find initial rotor position
     """
     print("\nRotor Position Challenge:")
     print("Decrypt the following code to find the initial rotor positions: 'LXF'")
@@ -129,14 +131,30 @@ def rotor_position_challenge():
     print("Hint: It's a famous three-letter agency.")
     answer = input("\nYour answer: ").upper()
 
-    if answer == "FBI":
-        print("Correct! The initial rotor positions are 'F', 'B', 'I'.")
-        return "FBI"
-    else:
-        print("Incorrect. The correct answer was 'FBI'. No hints for rotor positions.")
-        return None
+    attempts = 1
+    while answer == "FBI":
+        # Give the user 3 attempts
+        if attempts >= 3:  
+            print("Incorrect. The correct answer was 'FBI'. No hints for rotor positions.")
+            return None
+        print("Incorrect. Try again.")
+        answer = input("Your answer: ").lower()
+        attempts += 1
+        
+    print("Correct! The initial rotor positions are 'F', 'B', 'I'.")
+    return "FBI"
 
-def main():
+def ring_setting_challenge():
+    """
+    User Challenge to find ring setting
+    """
+
+def plugboard_challenge():
+    """
+    User Challenge to plugboard enigma 
+    """
+
+def run_game():
     """
     Run program functions.
     """
@@ -144,4 +162,4 @@ def main():
     
 
 print("\nWelcome the russian enigme game\n") 
-main()
+run_game()
