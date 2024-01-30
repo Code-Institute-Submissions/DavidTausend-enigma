@@ -36,6 +36,7 @@ def user():
     Save the user name
     """
     user_age = int(input("\nPlease enter your age to start the game: "))
+
     if user_age < 18:
         print("\nYou are to young to risk your life, wait until you are older")
         menu()
@@ -127,12 +128,14 @@ def rotor_position_challenge():
     """
     print("\nRotor Position Challenge:")
     print("Decrypt the following code to find the initial rotor positions: 'LXF'")
+
     # https://www.toppr.com/ask/
     print("Hint: It's a famous three-letter agency.")
     answer = input("\nYour answer: ").upper()
 
     attempts = 1
-    while answer == "FBI":
+    while answer != "FBI":
+
         # Give the user 3 attempts
         if attempts >= 3:  
             print("Incorrect. The correct answer was 'FBI'. No hints for rotor positions.")
@@ -153,8 +156,8 @@ def ring_setting_challenge():
     answer = input("\nYour answer: ").lower()
 
     attempts = 1
-    while answer == "fire" or answer == "flame":
-        if attempts >= 1:
+    while answer != "fire" or answer == "flame":
+        if attempts >= 3:
             print("Incorrect. The correct answer was 'fire'. No hints for ring settings.")
             return None
         print("Incorrect. Try again.")
@@ -168,8 +171,24 @@ def plugboard_challenge():
     """
     User Challenge to plugboard enigma 
     """
+    print("\nPlugboard Challenge:")
+    print("What 5-letter word becomes shorter when you add two letters to it?")
+    answer = input("\nYour answer: ").lower()
 
+    attempts = 1
+    while answer != "shorter":
+        if attempts >= 3:
+            print("Incorrect. The correct answer was 'short'. No hints for plugboard settings.")
+            return None
+        print("Incorrect. Try again.")
+        answer = input("Your answer: ").lower()
+        attempts += 1
+    
+    print("Correct! The plugboard setting hint is 'AD FG'.")
+    return "AD FG"
+    
 def run_game():
+
     """
     Run program functions.
     """
