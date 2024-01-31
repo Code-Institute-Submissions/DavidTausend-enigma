@@ -58,11 +58,11 @@ def user():
     ring_hint = ring_setting_challenge()
     plugboard_hint = plugboard_challenge()
 
-    # Pass the user_name to the email
-    email(user_name)
+    # Show encrypted email and get initial positions used
+    initial_positions = email(user_name)
 
     # Decrypt with hints
-    decrypt_email(user_name, rotor_hint, ring_hint, plugboard_hint)
+    decrypt_email(user_name, rotor_hint, ring_hint, plugboard_hint, initial_positions)
 
 def instructions():
     """
@@ -162,10 +162,10 @@ def encrypt_string(machine, plaintext):
     """
     Encrypts a string using the Enigma machine.
     """
-    # Set the initial rotor position
-    machine.set_display('WXC')  
+    initial_positions = 'AAA'
+    machine.set_display(initial_positions)
     ciphertext = machine.process_text(plaintext)
-    return ciphertext
+    return ciphertext, initial_positions
 
 
 def generate_email(user_name):
@@ -183,23 +183,25 @@ def generate_email(user_name):
 
     # Encrypt the body of the email
     body_plaintext = f"Hello {user_name}, your mission, should you choose to accept it, involves decrypting this message. Good luck."
-    body_encrypted = encrypt_string(enigma, body_plaintext)
+    body_encrypted, initial_positions = encrypt_string(enigma, body_plaintext)
 
-    return f"From: {sender}\nTo: {receiver}\nSubject: {subject}\n \n{body_plaintext}\n\n{body_encrypted}"
+    email_content = f"From: {sender}\nTo: {receiver}\nSubject: {subject}\n \n{body_plaintext}\n\n{body_encrypted}"
+
+    return email_content, initial_positions
 
 def email(user_name):
     """
     Encrypted email.
     """
-    email = generate_email(user_name)
+    email_content, initial_positions = generate_email(user_name)
     print("You've received an encrypted email:\n")
-    print(email)
-    #print("\nSome parts of this email are encrypted. Can you decrypt them to uncover the secret message and stop the WWIII?")
+    print(email_content)
+    return initial_positions
 
-def decrypt_email(user_name, rotor_hint, ring_hint, plugboard_hint):
+def decrypt_email(user_name, rotor_hint, ring_hint, plugboard_hint, initial_positions):
     print("\nNow, attempt to decrypt the encrypted message using the hints you've gathered.")
     encrypted_message = input("\nEnter the encrypted part of the email you received: ")
-    rotor_positions = input(f"Enter the rotor positions (Hint: {rotor_hint if rotor_hint else 'No hint'}): ").upper()
+    rotor_positions = input(f"Enter the rotor positions (Initial positions were {initial_positions}): ").upper()
     ring_settings_input = input(f"Enter the ring settings as three numbers separated by spaces (Hint: {ring_hint if ring_hint else 'No hint'}): ")
     plugboard_settings = input(f"Enter the plugboard settings as pairs of letters separated by spaces (Hint: {plugboard_hint if plugboard_hint else 'No hint'}): ")
 
