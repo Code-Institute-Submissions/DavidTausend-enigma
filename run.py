@@ -153,8 +153,8 @@ def setup_enigma_machine():
     machine = EnigmaMachine.from_key_sheet(
         rotors='II IV V',
         reflector='B',
-        ring_settings=[1, 20, 11],
-        plugboard_settings='AV BS CG DL FU HZ IN KM OW RX'
+        ring_settings=[5, 18, 21],
+        plugboard_settings='AB FG'
     )
     return machine
 
@@ -162,7 +162,7 @@ def encrypt_string(machine, plaintext):
     """
     Encrypts a string using the Enigma machine.
     """
-    initial_positions = 'AAA'
+    initial_positions = "FBI"
     machine.set_display(initial_positions)
     ciphertext = machine.process_text(plaintext)
     return ciphertext, initial_positions
@@ -198,7 +198,12 @@ def email(user_name):
     print(email_content)
     return initial_positions
 
+
 def decrypt_email(user_name, rotor_hint, ring_hint, plugboard_hint, initial_positions):
+    print(f"Rotor Positions (Hint): {initial_positions}")
+    print(f"Ring Settings (Hint): {ring_hint}")
+    print(f"Plugboard Settings (Hint): {plugboard_hint}")
+
     print("\nNow, attempt to decrypt the encrypted message using the hints you've gathered.")
     encrypted_message = input("\nEnter the encrypted part of the email you received: ")
     rotor_positions = input(f"Enter the rotor positions (Initial positions were {initial_positions}): ").upper()

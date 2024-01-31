@@ -193,6 +193,7 @@ pip3 freeze > requirements.txt
 enigma information:
 https://de.wikipedia.org/wiki/Enigma_I?oldformat=true
 https://www.youtube.com/watch?v=ybkkiGtJmkM
+https://en.wikipedia.org/wiki/Cryptanalysis_of_the_Enigma
 
 riddlers:
 https://www.toppr.com/ask/
