@@ -33,7 +33,7 @@ def menu():
 
 def user():
     """
-    Save the user name
+    Save the user name.
     """
     try:
         user_age = int(input("\nPlease enter your age to start the game: "))
@@ -50,7 +50,8 @@ def user():
         return
         
     user_name = input("\nPlease enter your name to start the game: ")
-    print(f"\nWelcome, {user_name}! You are about to embark on a mission of utmost secrecy and importance.\n")
+    # print(f"\nWelcome, {user_name}! You are about to embark on a mission of utmost secrecy and importance.\n")
+    print(f"\nHello {user_name}, your mission, should you choose to accept it, involves to pass 3 challenges and decrypt an email message. Good luck.\n")
 
     # Decryption challenges
     rotor_hint = rotor_position_challenge()
@@ -59,6 +60,9 @@ def user():
 
     # Pass the user_name to the email
     email(user_name)
+
+    # Decrypt with hints
+    decrypt_email(user_name, rotor_hint, ring_hint, plugboard_hint)
 
 def instructions():
     """
@@ -191,7 +195,27 @@ def email(user_name):
     print("You've received an encrypted email:\n")
     print(email)
     #print("\nSome parts of this email are encrypted. Can you decrypt them to uncover the secret message and stop the WWIII?")
-    
+
+def decrypt_email(user_name, rotor_hint, ring_hint, plugboard_hint):
+    print("\nNow, attempt to decrypt the encrypted message using the hints you've gathered.")
+    encrypted_message = input("\nEnter the encrypted part of the email you received: ")
+    rotor_positions = input(f"Enter the rotor positions (Hint: {rotor_hint if rotor_hint else 'No hint'}): ").upper()
+    ring_settings_input = input(f"Enter the ring settings as three numbers separated by spaces (Hint: {ring_hint if ring_hint else 'No hint'}): ")
+    plugboard_settings = input(f"Enter the plugboard settings as pairs of letters separated by spaces (Hint: {plugboard_hint if plugboard_hint else 'No hint'}): ")
+
+    ring_settings = [int(n) for n in ring_settings_input.split()] if ring_settings_input else [1, 1, 1]
+    enigma = EnigmaMachine.from_key_sheet(
+        rotors='II IV V',
+        reflector='B',
+        ring_settings=ring_settings,
+        plugboard_settings=plugboard_settings
+    )
+    enigma.set_display(rotor_positions)
+
+    # Decrypt the message
+    decrypted_message = enigma.process_text(encrypted_message)
+    print(f"\nDecrypted message: {decrypted_message}")
+
 def run_game():
 
     """
