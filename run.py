@@ -154,7 +154,7 @@ def setup_enigma_machine():
         rotors='II IV V',
         reflector='B',
         ring_settings=[5, 18, 21],
-        plugboard_settings='AB FG'
+        plugboard_settings='AD FG'
     )
     return machine
 
@@ -182,7 +182,7 @@ def generate_email(user_name):
     enigma = setup_enigma_machine()
 
     # Encrypt the body of the email
-    body_plaintext = f"Hello {user_name}, your mission, should you choose to accept it, involves decrypting this message. Good luck."
+    body_plaintext = f"Hello{user_name}congratulationsyoucompletedyourmission."
     body_encrypted, initial_positions = encrypt_string(enigma, body_plaintext)
 
     email_content = f"From: {sender}\nTo: {receiver}\nSubject: {subject}\n \n{body_plaintext}\n\n{body_encrypted}"
