@@ -54,22 +54,23 @@ def user():
     """
     Save the user name
     """
-    try:
-        user_age = int(input("\nPlease enter your age to start the game: "))
-    except ValueError:
-        print("Please enter a valid number for age.")
+    while True:
+        try:
+            user_age = int(input("\nPlease enter your age to start the game: "))
+            if user_age < 18:
+                print("\nYou are too young to risk your life, wait until you are older.\n")
+                continue 
+            break  
+        except ValueError:
+            print("Please enter a valid number for age.")
 
-        # Return to main menu
-        return
-
-    if user_age < 18:
-        print("\nYou are to young to risk your life, wait until you are older")
-
-        # Return to main menu
+    while True:
+        user_name = input("\nPlease enter your name to start the game: ").strip()
+        if user_name: 
+            break
+        print("Name cannot be empty. Please enter a valid name.")
         return
         
-    user_name = input("\nPlease enter your name to start the game: ")
-    # print(f"\nWelcome, {user_name}! You are about to embark on a mission of utmost secrecy and importance.\n")
     print(f"\nHello {user_name}, your mission, should you choose to accept it, involves to pass 3 challenges and decrypt an email message. Good luck.\n")
 
     # Decryption challenges
