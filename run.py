@@ -12,7 +12,15 @@ challenges = {
         {"challenge": "Decrypt 'UGM' to find the initial rotor positions.",
          "hint": "A precious yellow metal.",
          "solution": "GLD"}
-    ]
+    ],
+    "ring_setting": [
+        {"challenge": "I speak without a mouth and hear without ears. I have no body, but I come alive with wind. What am I?",
+         "hint": "Think about communication devices.",
+         "solution": [0, 5, 19]},
+        {"challenge": "The more of this there is, the less you see. What is it?",
+         "hint": "It's essential for life but can be dangerous in excess.",
+         "solution": [22, 1, 6]}
+      ],
 }
 
 def menu():
@@ -102,7 +110,7 @@ def rules():
 
 def get_random_challenge(challenge_type):
     """
-
+    Randomly chosse a challenge question
     """
     challenge_pool = challenges[challenge_type]
     selected_challenge = random.choice(challenge_pool)
@@ -224,17 +232,18 @@ def email(user_name):
 
 
 def decrypt_email(user_name, rotor_hint, ring_hint, plugboard_hint, initial_positions):
-    print(f"Rotor Positions (Hint): {initial_positions}")
-    print(f"Ring Settings (Hint): {ring_hint}")
-    print(f"Plugboard Settings (Hint): {plugboard_hint}")
+    print(f"\nRotor Positions (Hint): {rotor_hint if rotor_hint else 'No specific hint, refer to the challenge solution.'}")
+    print(f"Ring Settings (Hint): {ring_hint if ring_hint else 'No specific hint, refer to the challenge solution.'}")
+    print(f"Plugboard Settings (Hint): {plugboard_hint if plugboard_hint else 'No specific hint, refer to the challenge solution.'}")
 
-    print("\nNow, attempt to decrypt the encrypted message using the hints you've gathered.")
     encrypted_message = input("\nEnter the encrypted part of the email you received: ")
-    rotor_positions = input(f"Enter the rotor positions (Initial positions were {initial_positions}): ").upper()
+    rotor_positions = input(f"Enter the rotor positions (Hint was {rotor_hint}): ").upper() if rotor_hint else initial_positions
     ring_settings_input = input(f"Enter the ring settings as three numbers separated by spaces (Hint: {ring_hint if ring_hint else 'No hint'}): ")
     plugboard_settings = input(f"Enter the plugboard settings as pairs of letters separated by spaces (Hint: {plugboard_hint if plugboard_hint else 'No hint'}): ")
 
-    ring_settings = [int(n) for n in ring_settings_input.split()] if ring_settings_input else [1, 1, 1]
+    # Convert the ring settings input to list of integers
+    ring_settings = [int(x) for x in ring_settings_input.split()]
+
     enigma = EnigmaMachine.from_key_sheet(
         rotors='II IV V',
         reflector='B',
