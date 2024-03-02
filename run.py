@@ -3,6 +3,17 @@ import random
 # https://pypi.org/project/py-enigma/
 from enigma.machine import EnigmaMachine
 
+# https://www.toppr.com/ask/
+challenges = {
+    "rotor_position": [
+        {"challenge": "Decrypt 'LXF' to find the initial rotor positions.",
+         "hint": "It's a famous three-letter agency.",
+         "solution": "FBI"},
+        {"challenge": "Decrypt 'UGM' to find the initial rotor positions.",
+         "hint": "A precious yellow metal.",
+         "solution": "GLD"}
+    ]
+}
 
 def menu():
     """
@@ -89,30 +100,34 @@ def rules():
     Game rules
     """
 
+def get_random_challenge(challenge_type):
+    """
+
+    """
+    challenge_pool = challenges[challenge_type]
+    selected_challenge = random.choice(challenge_pool)
+    return selected_challenge
+
 def rotor_position_challenge():
     """
     User Challenge to find initial rotor position
     """
+    challenge = get_random_challenge("rotor_position")
     print("\nRotor Position Challenge:")
-    print("Decrypt the following code to find the initial rotor positions: 'LXF'")
-
-    # https://www.toppr.com/ask/
-    print("Hint: It's a famous three-letter agency.")
+    print(challenge["challenge"])
+    print(f"Hint: {challenge['hint']}")
     answer = input("\nYour answer: ").upper()
 
-    attempts = 1
-    while answer != "FBI":
-
-        # Give the user 3 attempts
-        if attempts >= 3:  
-            print("Incorrect. The correct answer was 'FBI'. No hints for rotor positions.")
-            return None
-        print("Incorrect. Try again.")
-        answer = input("Your answer: ").lower()
+    attempts, max_attempts = 0, 3
+    while answer != challenge["solution"] and attempts < max_attempts:
         attempts += 1
+        print("Incorrect. Try again.")
+        answer = input("Your answer: ").upper()
         
-    print("Correct! The initial rotor positions are 'F', 'B', 'I'.")
-    return "FBI"
+    if answer == challenge["solution"]:
+        print("Correct! The initial rotor positions are derived from your answer.")
+    else:
+        print(f"Incorrect. The correct answer was '{challenge['solution']}'. No hints for rotor positions.")
 
 def ring_setting_challenge():
     """
