@@ -33,7 +33,7 @@ def menu():
 
 def user():
     """
-    Save the user name.
+    Save the user name
     """
     try:
         user_age = int(input("\nPlease enter your age to start the game: "))
@@ -66,16 +66,27 @@ def user():
 
 def instructions():
     """
-    User instructions of the game.
+    User instructions of the game
     """
     print("\nInstructions:")
-    print("You will receive an encrypted email containing a secret message.")
-    print("Your task is to decrypt the message using a decryption key.")
-    print("Correctly decrypting the message will prevent WWIII and win the war.\n")
+    print("1. Start the game by entering your name. You must be at least 18 years old to play.")
+    print("2. You will face three challenges designed to test your decryption skills and provide hints for the final task:")
+    print("   a. Rotor Position Challenge: Decrypt a code to find the initial rotor positions of the Enigma machine.")
+    print("   b. Ring Setting Challenge: Solve a puzzle to discover the ring settings.")
+    print("   c. Plugboard Challenge: Answer a riddle to get a hint for the plugboard settings.")
+    print("3. After successfully completing the challenges, you will receive an encrypted email. The email contains a secret mission that you must decrypt using the Enigma machine.")
+    print("4. Use the hints from the challenges to configure the Enigma machine for decryption:")
+    print("   a. Enter the rotor positions as hinted by the Rotor Position Challenge (e.g., 'kab').")
+    print("   b. Input the ring settings as three numbers separated by spaces, based on the Ring Setting Challenge (e.g., '0 0 7').")
+    print("   c. Provide the plugboard settings as pairs of letters separated by spaces, as indicated by the Plugboard Challenge (e.g., 'dt fp').")
+    print("5. Decrypt the message to uncover the secret mission. Correct decryption will reveal a coherent message congratulating you on completing your mission.")
+    print("6. Completing the mission successfully will prevent WWIII and win the war.")
+    print("\nGood luck, agent! The fate of the world rests in your hands.\n")
+   
 
 def rules():
     """
-    Game rules.
+    Game rules
     """
 
 def rotor_position_challenge():
@@ -182,16 +193,14 @@ def generate_email(user_name):
     enigma = setup_enigma_machine()
 
     # Encrypt the body of the email
-    body_plaintext = f"Hello{user_name}congratulationsyoucompletedyourmission."
+    body_plaintext = f"Hello{user_name}congratulationsyoucompletedyourmission"
     body_encrypted, initial_positions = encrypt_string(enigma, body_plaintext)
-
     email_content = f"From: {sender}\nTo: {receiver}\nSubject: {subject}\n \n{body_plaintext}\n\n{body_encrypted}"
-
     return email_content, initial_positions
 
 def email(user_name):
     """
-    Encrypted email.
+    Encrypted email
     """
     email_content, initial_positions = generate_email(user_name)
     print("You've received an encrypted email:\n")
@@ -226,7 +235,7 @@ def decrypt_email(user_name, rotor_hint, ring_hint, plugboard_hint, initial_posi
 def run_game():
 
     """
-    Run program functions.
+    Run program functions
     """
     menu()
     
