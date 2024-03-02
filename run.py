@@ -3,6 +3,9 @@ import random
 # https://pypi.org/project/py-enigma/
 from enigma.machine import EnigmaMachine
 
+# https://docs.python.org/3/library/time.html
+import time
+
 # https://www.toppr.com/ask/
 challenges = {
     "rotor_position": [
@@ -31,11 +34,11 @@ def menu():
     # https://stackoverflow.com/questions/19964603/creating-a-menu-in-python
     while True:
         print("\nMain Menu:\n")
-        print("1. Start Game")
-        print("2. Instructions")
-        print("3. Rules")
-        print("4. Exit\n")
-        
+        print("1. Start Game - Begin your adventure and tackle the challenges.")
+        print("2. Instructions - Learn how to play and what to expect.")
+        print("3. About - Discover the story behind the game.")
+        print("4. Exit - Leave the game. Your progress will be saved.")
+
         choice = input("Enter your choice(1-4): ")
 
         if choice == "1":
@@ -44,7 +47,7 @@ def menu():
             instructions()
         elif choice == "3":
             rules()
-        elif choice == "4":
+        elif choice == "4": 
             print("\nExiting the game. Goodbye!\n")
             break
         else:
@@ -65,7 +68,7 @@ def user():
             print("Please enter a valid number for age.")
 
     while True:
-        user_name = input("\nPlease enter your name to start the game: ").strip()
+        user_name = input("\nEnter your name to embark on a thrilling adventure filled with mystery and intrigue:").strip()
         if user_name: 
             break
         print("Name cannot be empty. Please enter a valid name.")
@@ -119,12 +122,16 @@ def get_random_challenge(challenge_type):
 
 def rotor_position_challenge():
     """
-    User Challenge to find initial rotor position
+    User Challenge to find initial rotor position with a timer
     """
     challenge = get_random_challenge("rotor_position")
     print("\nRotor Position Challenge:")
     print(challenge["challenge"])
     print(f"Hint: {challenge['hint']}")
+
+    # Start the timer
+    start_time = time.time()
+
     answer = input("\nYour answer: ").upper()
 
     attempts, max_attempts = 0, 3
@@ -132,7 +139,14 @@ def rotor_position_challenge():
         attempts += 1
         print("Incorrect. Try again.")
         answer = input("Your answer: ").upper()
-        
+
+    # Stop timer
+    end_time = time.time()  
+
+    # Calculate duration
+    duration = end_time - start_time  
+    print(f"Time taken: {duration:.2f} seconds") 
+
     if answer == challenge["solution"]:
         print("Correct! The initial rotor positions are derived from your answer.")
     else:
@@ -233,6 +247,9 @@ def email(user_name):
 
 
 def decrypt_email(user_name, rotor_hint, ring_hint, plugboard_hint, initial_positions):
+    """
+    Decrypt email
+    """
     print(f"\nRotor Positions (Hint): {rotor_hint if rotor_hint else 'No specific hint, refer to the challenge solution.'}")
     print(f"Ring Settings (Hint): {ring_hint if ring_hint else 'No specific hint, refer to the challenge solution.'}")
     print(f"Plugboard Settings (Hint): {plugboard_hint if plugboard_hint else 'No specific hint, refer to the challenge solution.'}")
@@ -258,7 +275,6 @@ def decrypt_email(user_name, rotor_hint, ring_hint, plugboard_hint, initial_posi
     print(f"\nDecrypted message: {decrypted_message}")
 
 def run_game():
-
     """
     Run program functions
     """
