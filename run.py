@@ -17,11 +17,17 @@ challenges = {
          "solution": "GLD"}
     ],
     "ring_setting": [
+         {"challenge": "I am always hungry, I must always be fed. The finger I touch will soon turn red. What am I?",
+         "hint": "I can be found in every home and am essential for cooking, but be careful not to get too close.",
+         "text_solution": "fire",
+         "solution": [5, 18, 21]},
         {"challenge": "I speak without a mouth and hear without ears. I have no body, but I come alive with wind. What am I?",
          "hint": "Think about communication devices.",
+         "text_solution": "echo",
          "solution": [0, 5, 19]},
         {"challenge": "The more of this there is, the less you see. What is it?",
          "hint": "It's essential for life but can be dangerous in excess.",
+         "text_solution": "darkness",
          "solution": [22, 1, 6]}
       ],
 }
@@ -107,9 +113,9 @@ def instructions():
     print("\nGood luck, agent! The fate of the world rests in your hands.\n")
    
 
-def rules():
+def about():
     """
-    Game rules
+    Information about the game
     """
 
 def get_random_challenge(challenge_type):
@@ -156,32 +162,38 @@ def ring_setting_challenge():
     """
     User Challenge to find ring setting
     """
+    challenge = get_random_challenge("ring_setting")
     print("\nRing Setting Challenge:")
-    print("Solve this puzzle: I am always hungry, I must always be fed. The finger I touch will soon turn red. What am I?")
-    
+    print(challenge["challenge"])
+    print(f"Hint: {challenge['hint']}")
+
     # Start the timer
     start_time = time.time()
 
-    answer = input("\nYour answer: ").lower()
+    attempts, max_attempts = 0, 3
+    while attempts < max_attempts:
+        answer = input("\nYour answer: ").lower()
+        if answer == challenge["text_solution"]:
+            print("Correct! The ring settings are derived from your answer.")
+            break
+        else:
+            attempts += 1
+            print(f"Incorrect. {max_attempts - attempts} attempts remaining.")
+            if attempts < max_attempts:
+                print("Try again. Hint: ", challenge["hint"])
 
-     # Stop timer
-    end_time = time.time()  
+    # Stop timer
+    end_time = time.time()
 
     # Calculate duration
-    duration = end_time - start_time  
-    print(f"Time taken: {duration:.2f} seconds") 
+    duration = end_time - start_time
+    print(f"Time taken: {duration:.2f} seconds")
 
-    attempts = 1
-    while answer != "fire" or answer == "flame":
-        if attempts >= 3:
-            print("Incorrect. The correct answer was 'fire'. No hints for ring settings.")
-            return None
-        print("Incorrect. Try again.")
-        answer = input("Your answer: ").lower()
-        attempts += 1
-
-    print("Correct! The ring settings are '05', '18', '21'.")
-    return [5, 18, 21]
+    if attempts == max_attempts:
+        print(f"Incorrect. The correct answer was '{challenge['text_solution']}'. No hints for ring settings.")
+        return None
+    else:
+        return challenge["solution"]
 
 def plugboard_challenge():
     """
@@ -238,7 +250,6 @@ def encrypt_string(machine, plaintext):
     ciphertext = machine.process_text(plaintext)
     return ciphertext, initial_positions
 
-
 def generate_email(user_name):
     """
     Generates a random email with encrypted parts.
@@ -266,7 +277,6 @@ def email(user_name):
     print("You've received an encrypted email:\n")
     print(email_content)
     return initial_positions
-
 
 def decrypt_email(user_name, rotor_hint, ring_hint, plugboard_hint, initial_positions):
     """
