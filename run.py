@@ -158,7 +158,18 @@ def ring_setting_challenge():
     """
     print("\nRing Setting Challenge:")
     print("Solve this puzzle: I am always hungry, I must always be fed. The finger I touch will soon turn red. What am I?")
+    
+    # Start the timer
+    start_time = time.time()
+
     answer = input("\nYour answer: ").lower()
+
+     # Stop timer
+    end_time = time.time()  
+
+    # Calculate duration
+    duration = end_time - start_time  
+    print(f"Time taken: {duration:.2f} seconds") 
 
     attempts = 1
     while answer != "fire" or answer == "flame":
@@ -178,7 +189,18 @@ def plugboard_challenge():
     """
     print("\nPlugboard Challenge:")
     print("What 5-letter word becomes shorter when you add two letters to it?")
+
+    # Start the timer
+    start_time = time.time()
+
     answer = input("\nYour answer: ").lower()
+
+    # Stop timer
+    end_time = time.time()  
+
+    # Calculate duration
+    duration = end_time - start_time  
+    print(f"Time taken: {duration:.2f} seconds") 
 
     attempts = 1
     while answer != "shorter":
