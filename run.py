@@ -138,25 +138,27 @@ def rotor_position_challenge():
     # Start the timer
     start_time = time.time()
 
-    answer = input("\nYour answer: ").upper()
-
     attempts, max_attempts = 0, 3
-    while answer != challenge["solution"] and attempts < max_attempts:
-        attempts += 1
-        print("Incorrect. Try again.")
-        answer = input("Your answer: ").upper()
-
-    # Stop timer
-    end_time = time.time()  
-
-    # Calculate duration
-    duration = end_time - start_time  
-    print(f"Time taken: {duration:.2f} seconds") 
-
-    if answer == challenge["solution"]:
-        print("Correct! The initial rotor positions are derived from your answer.")
-    else:
-        print(f"Incorrect. The correct answer was '{challenge['solution']}'. No hints for rotor positions.")
+    while attempts < max_attempts:
+        answer = input("\nYour answer: ").upper()
+        if answer == challenge["solution"]:
+            print("Correct! The initial rotor positions are derived from your answer.")
+            # Stop timer and calculate duration
+            end_time = time.time()
+            duration = end_time - start_time
+            print(f"Time taken: {duration:.2f} seconds")
+            return challenge["solution"]
+        else:
+            attempts += 1
+            remaining_attempts = max_attempts - attempts
+            print(f"Incorrect. {remaining_attempts} {'attempt' if remaining_attempts == 1 else 'attempts'} remaining.")
+    
+    # Stop timer and calculate duration if max attempts reached
+    end_time = time.time()
+    duration = end_time - start_time
+    print(f"Time taken: {duration:.2f} seconds")
+    print(f"Incorrect. The correct answer was '{challenge['solution']}'. No hints for rotor positions.")
+    return None
 
 def ring_setting_challenge():
     """
@@ -170,30 +172,28 @@ def ring_setting_challenge():
     # Start the timer
     start_time = time.time()
 
-    attempts, max_attempts = 0, 3
+    attempts = 0
+    max_attempts = 3
     while attempts < max_attempts:
         answer = input("\nYour answer: ").lower()
         if answer == challenge["text_solution"]:
-            print("Correct! The ring settings are derived from your answer.")
-            break
+            print(f"Correct! The ring settings hint is: {challenge['solution']}")
+            # Stop timer and calculate duration
+            end_time = time.time()
+            duration = end_time - start_time
+            print(f"Time taken: {duration:.2f} seconds")
+            return challenge["solution"]
         else:
             attempts += 1
-            print(f"Incorrect. {max_attempts - attempts} attempts remaining.")
-            if attempts < max_attempts:
-                print("Try again. Hint: ", challenge["hint"])
-
-    # Stop timer
+            remaining_attempts = max_attempts - attempts
+            print(f"Incorrect. {remaining_attempts} {'attempt' if remaining_attempts == 1 else 'attempts'} remaining.")
+    
+    # Stop timer and calculate duration if max attempts reached
     end_time = time.time()
-
-    # Calculate duration
     duration = end_time - start_time
     print(f"Time taken: {duration:.2f} seconds")
-
-    if attempts == max_attempts:
-        print(f"Incorrect. The correct answer was '{challenge['text_solution']}'. No hints for ring settings.")
-        return None
-    else:
-        return challenge["solution"]
+    print(f"Incorrect. The correct answer was '{challenge['text_solution']}'. No hints for ring settings.")
+    return None
 
 def plugboard_challenge():
     """
