@@ -6,6 +6,11 @@ from enigma.machine import EnigmaMachine
 # https://docs.python.org/3/library/time.html
 import time
 
+# https://github.com/Textualize/rich
+from rich.console import Console
+
+console = Console()
+
 # https://www.toppr.com/ask/
 challenges = {
     "rotor_position": [
@@ -81,26 +86,26 @@ def user():
         try:
             user_age = int(input("\nPlease enter your age to start the game: "))
             if user_age < 18:
-                print("\nYou are too young to risk your life, wait until you are older.\n")
+                console.print("\nYou are too young to risk your life, wait until you are older.\n")
                 continue 
             break  
         except ValueError:
-            print("Please enter a valid number for age.")
+             console.print("Please enter a valid number for age.", style="bold red")
     while True:
         user_name = input("\nEnter your name to embark on a thrilling adventure filled with mystery and intrigue:").strip()
         if user_name: 
             break
-        print("Name cannot be empty. Please enter a valid name.")
+        console.print("Name cannot be empty. Please enter a valid name.", style="bold red")
         return
 
     rotor_positions = rotor_position_challenge()
     if not rotor_positions:
-        print("Failed to obtain rotor positions. Cannot proceed.")
+        console.print("Failed to obtain rotor positions. Cannot proceed.")
         return
 
     ring_hint = ring_setting_challenge()
     if not ring_hint:
-        print("Failed to obtain ring settings. Cannot proceed with email encryption.")
+        console.print("Failed to obtain ring settings. Cannot proceed with email encryption.")
         return
 
     plugboard_hint = plugboard_challenge()
