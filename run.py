@@ -87,11 +87,15 @@ def user():
     ring_hint = ring_setting_challenge()
     plugboard_hint = plugboard_challenge()
 
+    if ring_hint is None:
+        print("Failed to obtain ring settings. Cannot proceed with email encryption.")
+        return
+
     # Show encrypted email and get initial positions used
-    initial_positions = email(user_name)
+    encrypted_email = email(user_name, ring_hint)
 
     # Decrypt with hints
-    decrypt_email(user_name, rotor_hint, ring_hint, plugboard_hint, initial_positions)
+    decrypt_email(user_name, rotor_hint, ring_hint, plugboard_hint, encrypted_email)
 
 def instructions():
     """
@@ -226,9 +230,9 @@ def plugboard_challenge():
     print("Correct! The plugboard setting hint is 'AD FG'.")
     return "AD FG"
 
-def setup_enigma_machine():
+def setup_enigma_machine(ring_settings):
     """
-    Setting up Enigma machine with predefined settings.
+    Setting up Enigma machine with predefined settings
     """
 
     # https://pypi.org/project/py-enigma/
@@ -236,7 +240,7 @@ def setup_enigma_machine():
     machine = EnigmaMachine.from_key_sheet(
         rotors='II IV V',
         reflector='B',
-        ring_settings=[5, 18, 21],
+        ring_settings=ring_settings,
         plugboard_settings='AD FG'
     )
     return machine
@@ -250,35 +254,35 @@ def encrypt_string(machine, plaintext):
     ciphertext = machine.process_text(plaintext)
     return ciphertext, initial_positions
 
-def generate_email(user_name):
+def generate_email(user_name, ring_settings):
     """
     Generates a random email with encrypted parts.
     """
     # https://www.w3schools.com/python/ref_random_choice.asp
     # https://numpy.org/doc/stable/reference/random/generated/numpy.random.choice.html
-    sender = "secretagent@" + random.choice(["gmail.com", "yahoo.com", "hotmail.com", "gmx.com", "outlook.com", "codeinstitute.net" ])
-    receiver = f"{user_name}@" + random.choice(["gmail.com", "yahoo.com", "hotmail.com", "gmx.com", "outlook.com", "codeinstitute.net" ])
+    sender = "secretagent@" + random.choice(["gmail.com", "yahoo.com", "hotmail.com", "gmx.com", "outlook.com", "codeinstitute.net"])
+    receiver = f"{user_name}@" + random.choice(["gmail.com", "yahoo.com", "hotmail.com", "gmx.com", "outlook.com", "codeinstitute.net"])
     subject = "Top Secret Mission"
 
     # Set up the Enigma machine for the email
-    enigma = setup_enigma_machine()
+    enigma = setup_enigma_machine(ring_settings)
+    enigma.set_display("AAA")
 
-    # Encrypt the body of the email
     body_plaintext = f"Hello{user_name}congratulationsyoucompletedyourmission"
     body_encrypted, initial_positions = encrypt_string(enigma, body_plaintext)
-    email_content = f"From: {sender}\nTo: {receiver}\nSubject: {subject}\n \n{body_plaintext}\n\n{body_encrypted}"
-    return email_content, initial_positions
+    email_content = f"From: {sender}\nTo: {receiver}\nSubject: {subject}\n\n{body_plaintext}\n\nEncrypted: {body_encrypted}"
+    return email_content, body_encrypted
 
-def email(user_name):
+def email(user_name, ring_settings):
     """
     Encrypted email
     """
-    email_content, initial_positions = generate_email(user_name)
+    email_content, encrypted_email = generate_email(user_name, ring_settings)
     print("You've received an encrypted email:\n")
     print(email_content)
-    return initial_positions
+    return encrypted_email
 
-def decrypt_email(user_name, rotor_hint, ring_hint, plugboard_hint, initial_positions):
+def decrypt_email(user_name, rotor_hint, ring_hint, plugboard_hint, encrypted_message):
     """
     Decrypt email
     """
@@ -286,20 +290,14 @@ def decrypt_email(user_name, rotor_hint, ring_hint, plugboard_hint, initial_posi
     print(f"Ring Settings (Hint): {ring_hint if ring_hint else 'No specific hint, refer to the challenge solution.'}")
     print(f"Plugboard Settings (Hint): {plugboard_hint if plugboard_hint else 'No specific hint, refer to the challenge solution.'}")
 
-    encrypted_message = input("\nEnter the encrypted part of the email you received: ")
-    rotor_positions = input(f"Enter the rotor positions (Hint was {rotor_hint}): ").upper() if rotor_hint else initial_positions
+    rotor_positions = input(f"Enter the rotor positions (Hint was {rotor_hint}): ").upper() if rotor_hint else "AAA"
     ring_settings_input = input(f"Enter the ring settings as three numbers separated by spaces (Hint: {ring_hint if ring_hint else 'No hint'}): ")
     plugboard_settings = input(f"Enter the plugboard settings as pairs of letters separated by spaces (Hint: {plugboard_hint if plugboard_hint else 'No hint'}): ")
 
     # Convert the ring settings input to list of integers
     ring_settings = [int(x) for x in ring_settings_input.split()]
+    enigma = setup_enigma_machine(ring_settings)
 
-    enigma = EnigmaMachine.from_key_sheet(
-        rotors='II IV V',
-        reflector='B',
-        ring_settings=ring_settings,
-        plugboard_settings=plugboard_settings
-    )
     enigma.set_display(rotor_positions)
 
     # Decrypt the message
