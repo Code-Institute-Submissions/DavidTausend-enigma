@@ -30,6 +30,20 @@ challenges = {
          "text_solution": "darkness",
          "solution": [22, 1, 6]}
       ],
+    "plugboard_setting": [
+    {"challenge": "What 5-letter word becomes shorter when you add two letters to it?",
+     "hint": "It's not about length but semantics.",
+     "text_solution": "short",
+     "solution": "AD FG"},
+    {"challenge": "I speak without a mouth and hear without ears. I have no body, but I come alive with wind. What am I?",
+     "hint": "Often heard but not seen.",
+     "text_solution": "echo",
+     "solution": "EH CO"},
+    {"challenge": "Forward I am heavy, but backward I am not. What am I?",
+     "hint": "Think about direction and weight.",
+     "text_solution": "ton",
+     "solution": "TN ON"}
+    ]
 }
 
 def menu():
@@ -201,40 +215,32 @@ def ring_setting_challenge():
 
 def plugboard_challenge():
     """
-    User Challenge to determine plugboard settings interactively
+    User Challenge for the plugboard settings
     """
+    challenge = get_random_challenge("plugboard_setting")
     print("\nPlugboard Challenge:")
-    print("What 5-letter word becomes shorter when you add two letters to it?")
+    print(challenge["challenge"])
+    print(f"Hint: {challenge['hint']}")
 
-    # Start the timer
     start_time = time.time()
 
-    correct_answer = "short"
-    answer = input("\nYour answer: ").lower()
+    attempts, max_attempts = 0, 3
+    while attempts < max_attempts:
+        answer = input("\nYour answer: ").lower()
+        if answer == challenge["text_solution"]:
+            print(f"Correct! The plugboard setting hint is: {challenge['solution']}")
+            end_time = time.time()
+            print(f"Time taken: {end_time - start_time:.2f} seconds")
+            return challenge["solution"]
+        else:
+            attempts += 1
+            print(f"Incorrect. {max_attempts - attempts} attempts remaining.")
 
-    # Stop timer
     end_time = time.time()
+    print(f"Time taken: {end_time - start_time:.2f} seconds")
+    print(f"Unfortunately, you didn't get the correct answer. The correct answer was '{challenge['text_solution']}'.")
 
-    # Calculate duration
-    duration = end_time - start_time
-    print(f"Time taken: {duration:.2f} seconds")
-
-    attempts = 1
-    max_attempts = 3
-
-    while answer != correct_answer:
-        if attempts >= max_attempts:
-            print(f"Incorrect. The correct answer was '{correct_answer}'. No hints for plugboard settings.")
-            return None
-
-        print("Incorrect. Try again.")
-        answer = input("Your answer: ").lower()
-        attempts += 1
-
-    print("Correct! The plugboard setting hint is 'AD FG'.")
-    plugboard_settings = "AD FG"
-    return plugboard_settings
-
+    return None
 
 def setup_enigma_machine(ring_settings):
     """
