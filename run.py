@@ -72,30 +72,30 @@ def user():
             break  
         except ValueError:
             print("Please enter a valid number for age.")
-
     while True:
         user_name = input("\nEnter your name to embark on a thrilling adventure filled with mystery and intrigue:").strip()
         if user_name: 
             break
         print("Name cannot be empty. Please enter a valid name.")
         return
-        
-    print(f"\nHello {user_name}, your mission, should you choose to accept it, involves to pass 3 challenges and decrypt an email message. Good luck.\n")
 
-    # Decryption challenges
-    rotor_hint = rotor_position_challenge()
+    rotor_positions = rotor_position_challenge()
+    if not rotor_positions:
+        print("Failed to obtain rotor positions. Cannot proceed.")
+        return
+
     ring_hint = ring_setting_challenge()
-    plugboard_hint = plugboard_challenge()
-
-    if ring_hint is None:
+    if not ring_hint:
         print("Failed to obtain ring settings. Cannot proceed with email encryption.")
         return
 
-    # Show encrypted email and get initial positions used
-    encrypted_email = email(user_name, ring_hint)
+    plugboard_hint = plugboard_challenge()
 
+    email_content, encrypted_email = email(user_name, ring_hint, rotor_positions)
+    print(email_content)
+    
     # Decrypt with hints
-    decrypt_email(user_name, rotor_hint, ring_hint, plugboard_hint, encrypted_email)
+    decrypt_email(user_name, rotor_positions, ring_hint, plugboard_hint, encrypted_email) 
 
 def instructions():
     """
@@ -245,16 +245,15 @@ def setup_enigma_machine(ring_settings):
     )
     return machine
 
-def encrypt_string(machine, plaintext):
+def encrypt_string(machine, plaintext, initial_positions):
     """
     Encrypts a string using the Enigma machine.
     """
-    initial_positions = "FBI"
     machine.set_display(initial_positions)
     ciphertext = machine.process_text(plaintext)
     return ciphertext, initial_positions
 
-def generate_email(user_name, ring_settings):
+def generate_email(user_name, ring_settings, rotor_positions):
     """
     Generates a random email with encrypted parts.
     """
@@ -266,21 +265,23 @@ def generate_email(user_name, ring_settings):
 
     # Set up the Enigma machine for the email
     enigma = setup_enigma_machine(ring_settings)
-    enigma.set_display("AAA")
+    enigma.set_display(rotor_positions)
 
     body_plaintext = f"Hello{user_name}congratulationsyoucompletedyourmission"
-    body_encrypted, initial_positions = encrypt_string(enigma, body_plaintext)
-    email_content = f"From: {sender}\nTo: {receiver}\nSubject: {subject}\n\n{body_plaintext}\n\nEncrypted: {body_encrypted}"
-    return email_content, body_encrypted
+    enigma.set_display(rotor_positions) 
+    encrypted_message = enigma.process_text(body_plaintext)
+    email_content = f"From: {sender}\nTo: {receiver}\nSubject: {subject}\n\n{body_plaintext}\n\nEncrypted: {encrypted_message}"
+    
+    return email_content, encrypted_message
 
-def email(user_name, ring_settings):
+def email(user_name, ring_settings, rotor_positions):
     """
     Encrypted email
     """
-    email_content, encrypted_email = generate_email(user_name, ring_settings)
+    email_content, encrypted_email = generate_email(user_name, ring_settings, rotor_positions)
     print("You've received an encrypted email:\n")
     print(email_content)
-    return encrypted_email
+    return email_content, encrypted_email
 
 def decrypt_email(user_name, rotor_hint, ring_hint, plugboard_hint, encrypted_message):
     """
