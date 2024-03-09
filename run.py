@@ -201,7 +201,7 @@ def ring_setting_challenge():
 
 def plugboard_challenge():
     """
-    User Challenge to plugboard enigma 
+    User Challenge to determine plugboard settings interactively
     """
     print("\nPlugboard Challenge:")
     print("What 5-letter word becomes shorter when you add two letters to it?")
@@ -209,26 +209,32 @@ def plugboard_challenge():
     # Start the timer
     start_time = time.time()
 
+    correct_answer = "short"
     answer = input("\nYour answer: ").lower()
 
     # Stop timer
-    end_time = time.time()  
+    end_time = time.time()
 
     # Calculate duration
-    duration = end_time - start_time  
-    print(f"Time taken: {duration:.2f} seconds") 
+    duration = end_time - start_time
+    print(f"Time taken: {duration:.2f} seconds")
 
     attempts = 1
-    while answer != "shorter":
-        if attempts >= 3:
-            print("Incorrect. The correct answer was 'short'. No hints for plugboard settings.")
+    max_attempts = 3
+
+    while answer != correct_answer:
+        if attempts >= max_attempts:
+            print(f"Incorrect. The correct answer was '{correct_answer}'. No hints for plugboard settings.")
             return None
+
         print("Incorrect. Try again.")
         answer = input("Your answer: ").lower()
         attempts += 1
 
     print("Correct! The plugboard setting hint is 'AD FG'.")
-    return "AD FG"
+    plugboard_settings = "AD FG"
+    return plugboard_settings
+
 
 def setup_enigma_machine(ring_settings):
     """
