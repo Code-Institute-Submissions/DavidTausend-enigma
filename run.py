@@ -95,7 +95,7 @@ def user():
         except ValueError:
              console.print("Please enter a valid number for age.", style="bold red")
     while True:
-        user_name = input("\nEnter your name to embark on a thrilling adventure filled with mystery and intrigue:").strip()
+        user_name = input("\nEnter your name to embark on a thrilling adventure filled with mystery and intrigue: ").strip()
         if user_name: 
             break
         console.print("Name cannot be empty. Please enter a valid name.", style="bold red")
@@ -177,13 +177,13 @@ def rotor_position_challenge():
         else:
             attempts += 1
             remaining_attempts = max_attempts - attempts
-            print(f"Incorrect. {remaining_attempts} {'attempt' if remaining_attempts == 1 else 'attempts'} remaining.")
+            console.print(f"Incorrect. {remaining_attempts} {'attempt' if remaining_attempts == 1 else 'attempts'} remaining." , style="bold red")
     
     # Stop timer and calculate duration if max attempts reached
     end_time = time.time()
     duration = end_time - start_time
     print(f"Time taken: {duration:.2f} seconds")
-    print(f"Incorrect. The correct answer was '{challenge['solution']}'. No hints for rotor positions.")
+    console.print(f"Incorrect. The correct answer was '{challenge['solution']}'. No hints for rotor positions.", style="bold red")
     return None
 
 def ring_setting_challenge():
@@ -212,13 +212,13 @@ def ring_setting_challenge():
         else:
             attempts += 1
             remaining_attempts = max_attempts - attempts
-            print(f"Incorrect. {remaining_attempts} {'attempt' if remaining_attempts == 1 else 'attempts'} remaining.")
+            console.print(f"Incorrect. {remaining_attempts} {'attempt' if remaining_attempts == 1 else 'attempts'} remaining.", style="bold red")
     
     # Stop timer and calculate duration if max attempts reached
     end_time = time.time()
     duration = end_time - start_time
     print(f"Time taken: {duration:.2f} seconds")
-    print(f"Incorrect. The correct answer was '{challenge['text_solution']}'. No hints for ring settings.")
+    console.print(f"Incorrect. The correct answer was '{challenge['text_solution']}'. No hints for ring settings.", style="bold red")
     return None
 
 def plugboard_challenge():
@@ -242,17 +242,16 @@ def plugboard_challenge():
             return challenge["solution"]
         else:
             attempts += 1
-            print(f"Incorrect. {max_attempts - attempts} attempts remaining.")
+            console.print(f"Incorrect. {max_attempts - attempts} attempts remaining.", style="bold red")
 
     end_time = time.time()
     print(f"Time taken: {end_time - start_time:.2f} seconds")
-    print(f"Unfortunately, you didn't get the correct answer. The correct answer was '{challenge['text_solution']}'.")
-
+    console.print(f"Unfortunately, you didn't get the correct answer. The correct answer was '{challenge['text_solution']}'.", style="bold red")
     return None
 
 def setup_enigma_machine(ring_settings):
     """
-    Setting up Enigma machine with predefined settings
+    Setting up Enigma machine with predefined settings.
     """
 
     # https://pypi.org/project/py-enigma/
@@ -296,7 +295,7 @@ def generate_email(user_name, ring_settings, rotor_positions):
 
 def email(user_name, ring_settings, rotor_positions):
     """
-    Encrypted email
+    Encrypted email.
     """
     email_content, encrypted_email = generate_email(user_name, ring_settings, rotor_positions)
     print("You've received an encrypted email:\n")
@@ -305,7 +304,7 @@ def email(user_name, ring_settings, rotor_positions):
 
 def decrypt_email(user_name, rotor_hint, ring_hint, plugboard_hint, encrypted_message):
     """
-    Decrypt email
+    Decrypt email.
     """
     print(f"\nRotor Positions (Hint): {rotor_hint if rotor_hint else 'No specific hint, refer to the challenge solution.'}")
     print(f"Ring Settings (Hint): {ring_hint if ring_hint else 'No specific hint, refer to the challenge solution.'}")
