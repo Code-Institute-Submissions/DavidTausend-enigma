@@ -65,45 +65,48 @@ def menu():
     # https://stackoverflow.com/questions/19964603/creating-a-menu-in-python
     while True:
         console.print("Main Menu:", style="bold blue underline")
-        print("1. Start Game - Begin your adventure and tackle the challenges.")
-        print("2. Instructions - Learn how to play and what to expect.")
-        print("3. About - Discover the story behind the game.")
-        print("4. Exit - Leave the game. Your progress will be saved.")
+        options = ["1. Start Game", "2. Instructions", "3. About", "4. Exit"]
+        for option in options:
+            console.print(option, style="bold yellow")
 
-        choice = input("Enter your choice(1-4): ")
+        choice = input("\nEnter your choice (1-4): ")
 
         if choice == "1":
             user()
         elif choice == "2":
             instructions()
         elif choice == "3":
-            rules()
-        elif choice == "4": 
-            print("\nExiting the game. Goodbye!\n")
+            about()
+        elif choice == "4":
+            console.print("\nExiting the game. Goodbye!\n", style="bold red")
             break
         else:
-            console.print("Invalid choice. Please enter 1, 2, 3 or 4.", style="bold red")
+            console.print("\nInvalid choice. Please enter a number between 1 and 4.\n", style="bold red")
 
 def user():
     """
     Save the user name
     """
     clear_screen()
+    console.print("Welcome to the Adventure!", style="bold magenta")
+
+    # Age Verification
     while True:
-        try:
-            user_age = int(input("\nPlease enter your age to start the game: "))
-            if user_age < 18:
-                console.print("\nYou are too young to risk your life, wait until you are older.\n")
-                continue 
-            break  
-        except ValueError:
-             console.print("Please enter a valid number for age.", style="bold red")
+        user_age = input("\nPlease enter your age to start the game: ")
+        if user_age.isdigit() and int(user_age) >= 18:
+            break
+        elif user_age.isdigit() and int(user_age) < 18:
+            console.print("You are too young to risk your life, wait until you are older.\n", style="bold red")
+            return  # Exit the function if under-aged
+        else:
+            console.print("Invalid input. Please enter a valid number for age.", style="bold red")
+
+    # Name Input
     while True:
         user_name = input("\nEnter your name to embark on a thrilling adventure filled with mystery and intrigue: ").strip()
-        if user_name: 
+        if user_name:
             break
         console.print("Name cannot be empty. Please enter a valid name.", style="bold red")
-        return
 
     rotor_positions = rotor_position_challenge()
     if not rotor_positions:
