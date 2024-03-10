@@ -60,6 +60,7 @@ def menu():
     """
     Main menu
     """
+    clear_screen()
 
     # https://stackoverflow.com/questions/19964603/creating-a-menu-in-python
     while True:
@@ -87,6 +88,7 @@ def user():
     """
     Save the user name
     """
+    clear_screen()
     while True:
         try:
             user_age = int(input("\nPlease enter your age to start the game: "))
@@ -116,7 +118,7 @@ def user():
     plugboard_hint = plugboard_challenge()
 
     email_content, encrypted_email = email(user_name, ring_hint, rotor_positions)
-    print(email_content)
+    console.print(email_content, style="bold green")
     
     # Decrypt with hints
     decrypt_email(user_name, rotor_positions, ring_hint, plugboard_hint, encrypted_email) 
@@ -125,6 +127,7 @@ def instructions():
     """
     User instructions of the game
     """
+    clear_screen()
     print("\nInstructions:")
     print("1. Start the game by entering your name. You must be at least 18 years old to play.")
     print("2. You will face three challenges designed to test your decryption skills and provide hints for the final task:")
@@ -145,6 +148,7 @@ def about():
     """
     Information about the game
     """
+    clear_screen()
 
 def get_random_challenge(challenge_type):
     """
@@ -158,6 +162,7 @@ def rotor_position_challenge():
     """
     User Challenge to find initial rotor position with a timer
     """
+    clear_screen()
     challenge = get_random_challenge("rotor_position")
     print("\nRotor Position Challenge:")
     print(challenge["challenge"])
@@ -192,6 +197,7 @@ def ring_setting_challenge():
     """
     User Challenge to find ring setting
     """
+    clear_screen()
     challenge = get_random_challenge("ring_setting")
     print("\nRing Setting Challenge:")
     print(challenge["challenge"])
@@ -227,6 +233,7 @@ def plugboard_challenge():
     """
     User Challenge for the plugboard settings
     """
+    clear_screen()
     challenge = get_random_challenge("plugboard_setting")
     print("\nPlugboard Challenge:")
     print(challenge["challenge"])
@@ -255,6 +262,7 @@ def setup_enigma_machine(ring_settings):
     """
     Setting up Enigma machine with predefined settings.
     """
+    clear_screen()
 
     # https://pypi.org/project/py-enigma/
     # Set up Enigma Machine with some initial settings
@@ -283,16 +291,13 @@ def generate_email(user_name, ring_settings, rotor_positions):
     sender = "secretagent@" + random.choice(["gmail.com", "yahoo.com", "hotmail.com", "gmx.com", "outlook.com", "codeinstitute.net"])
     receiver = f"{user_name}@" + random.choice(["gmail.com", "yahoo.com", "hotmail.com", "gmx.com", "outlook.com", "codeinstitute.net"])
     subject = "Top Secret Mission"
+    body_plaintext = f"Hello{user_name}congratulationsyoucompletedyourmission"
 
     # Set up the Enigma machine for the email
     enigma = setup_enigma_machine(ring_settings)
     enigma.set_display(rotor_positions)
-
-    body_plaintext = f"Hello{user_name}congratulationsyoucompletedyourmission"
-    enigma.set_display(rotor_positions) 
-    encrypted_message = enigma.process_text(body_plaintext)
-    email_content = f"From: {sender}\nTo: {receiver}\nSubject: {subject}\n\n{body_plaintext}\n\nEncrypted: {encrypted_message}"
-    
+    encrypted_message = enigma.process_text(body_plaintext.replace(" ", "").upper()) 
+    email_content = f"From: {sender}\nTo: {receiver}\nSubject: {subject}\n\n{encrypted_message}"
     return email_content, encrypted_message
 
 def email(user_name, ring_settings, rotor_positions):
@@ -301,7 +306,6 @@ def email(user_name, ring_settings, rotor_positions):
     """
     email_content, encrypted_email = generate_email(user_name, ring_settings, rotor_positions)
     print("You've received an encrypted email:\n")
-    print(email_content)
     return email_content, encrypted_email
 
 def decrypt_email(user_name, rotor_hint, ring_hint, plugboard_hint, encrypted_message):
