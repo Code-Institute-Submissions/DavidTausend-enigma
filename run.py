@@ -97,7 +97,7 @@ def user():
             break
         elif user_age.isdigit() and int(user_age) < 18:
             console.print("You are too young to risk your life, wait until you are older.\n", style="bold red")
-            return  # Exit the function if under-aged
+            return
         else:
             console.print("Invalid input. Please enter a valid number for age.", style="bold red")
 
@@ -119,7 +119,6 @@ def user():
         return
 
     plugboard_hint = plugboard_challenge()
-
     email_content, encrypted_email = email(user_name, ring_hint, rotor_positions)
     console.print(email_content, style="bold green")
     
@@ -163,38 +162,40 @@ def get_random_challenge(challenge_type):
 
 def rotor_position_challenge():
     """
-    User Challenge to find initial rotor position with a timer
+    User Challenge to find initial rotor position with a timer.
     """
     clear_screen()
     challenge = get_random_challenge("rotor_position")
-    print("\nRotor Position Challenge:")
-    print(challenge["challenge"])
-    print(f"Hint: {challenge['hint']}")
+    console.print(f"\nRotor Position Challenge: {challenge['challenge']}\nHint: {challenge['hint']}", style="bold yellow")
+
+    attempts, max_attempts = 0, 3
 
     # Start the timer
     start_time = time.time()
 
-    attempts, max_attempts = 0, 3
     while attempts < max_attempts:
-        answer = input("\nYour answer: ").upper()
+        answer = input("\nYour answer: ").strip().upper()
+        if " " in answer:
+            console.print("Spaces are not allowed. Please enter your answer without spaces.", style="bold red")
+            continue
+
         if answer == challenge["solution"]:
-            print("Correct! The initial rotor positions are derived from your answer.")
+            
             # Stop timer and calculate duration
             end_time = time.time()
-            duration = end_time - start_time
-            print(f"Time taken: {duration:.2f} seconds")
+            console.print(f"Correct! Time taken: {end_time - start_time:.2f} seconds", style="bold green")
             return challenge["solution"]
-        else:
-            attempts += 1
-            remaining_attempts = max_attempts - attempts
-            console.print(f"Incorrect. {remaining_attempts} {'attempt' if remaining_attempts == 1 else 'attempts'} remaining." , style="bold red")
-    
+
+        attempts += 1
+        remaining_attempts = max_attempts - attempts
+        console.print(f"Incorrect. {remaining_attempts} {'attempt' if remaining_attempts == 1 else 'attempts'} remaining.", style="bold red")
+
     # Stop timer and calculate duration if max attempts reached
     end_time = time.time()
-    duration = end_time - start_time
-    print(f"Time taken: {duration:.2f} seconds")
-    console.print(f"Incorrect. The correct answer was '{challenge['solution']}'. No hints for rotor positions.", style="bold red")
+    console.print(f"Time taken: {end_time - start_time:.2f} seconds", style="bold red")
+    console.print(f"The correct answer was '{challenge['solution']}'. No hints for rotor positions.", style="bold red")
     return None
+
 
 def ring_setting_challenge():
     """
@@ -202,62 +203,65 @@ def ring_setting_challenge():
     """
     clear_screen()
     challenge = get_random_challenge("ring_setting")
-    print("\nRing Setting Challenge:")
-    print(challenge["challenge"])
-    print(f"Hint: {challenge['hint']}")
+    console.print(f"\nRing Setting Challenge: {challenge['challenge']}\nHint: {challenge['hint']}", style="bold yellow")
+
+    attempts, max_attempts = 0, 3
 
     # Start the timer
     start_time = time.time()
 
-    attempts = 0
-    max_attempts = 3
     while attempts < max_attempts:
-        answer = input("\nYour answer: ").lower()
+        answer = input("\nYour answer: ").strip().lower()
+
+        if " " in answer:
+            console.print("Spaces are not allowed. Please enter your answer without spaces.", style="bold red")
+            continue
+
         if answer == challenge["text_solution"]:
-            print(f"Correct! The ring settings hint is: {challenge['solution']}")
+
             # Stop timer and calculate duration
             end_time = time.time()
-            duration = end_time - start_time
-            print(f"Time taken: {duration:.2f} seconds")
+            console.print(f"Correct! Time taken: {end_time - start_time:.2f} seconds", style="bold green")
             return challenge["solution"]
-        else:
-            attempts += 1
-            remaining_attempts = max_attempts - attempts
-            console.print(f"Incorrect. {remaining_attempts} {'attempt' if remaining_attempts == 1 else 'attempts'} remaining.", style="bold red")
-    
+
+        attempts += 1
+        remaining_attempts = max_attempts - attempts
+        console.print(f"Incorrect. {remaining_attempts} {'attempt' if remaining_attempts == 1 else 'attempts'} remaining.", style="bold red")
+
     # Stop timer and calculate duration if max attempts reached
     end_time = time.time()
-    duration = end_time - start_time
-    print(f"Time taken: {duration:.2f} seconds")
-    console.print(f"Incorrect. The correct answer was '{challenge['text_solution']}'. No hints for ring settings.", style="bold red")
+    console.print(f"Time taken: {end_time - start_time:.2f} seconds", style="bold red")
+    console.print(f"The correct answer was '{challenge['text_solution']}'. No hints for ring settings.", style="bold red")
     return None
 
 def plugboard_challenge():
     """
-    User Challenge for the plugboard settings
+    User Challenge for the plugboard settings.
     """
     clear_screen()
     challenge = get_random_challenge("plugboard_setting")
-    print("\nPlugboard Challenge:")
-    print(challenge["challenge"])
-    print(f"Hint: {challenge['hint']}")
-
-    start_time = time.time()
+    console.print(f"\nPlugboard Challenge: {challenge['challenge']}\nHint: {challenge['hint']}", style="bold yellow")
 
     attempts, max_attempts = 0, 3
+    start_time = time.time()
+
     while attempts < max_attempts:
-        answer = input("\nYour answer: ").lower()
+        answer = input("\nYour answer: ").strip().lower()
+
+        if " " in answer:
+            console.print("Spaces are not allowed. Please enter your answer without spaces.", style="bold red")
+            continue
+
         if answer == challenge["text_solution"]:
-            print(f"Correct! The plugboard setting hint is: {challenge['solution']}")
             end_time = time.time()
-            print(f"Time taken: {end_time - start_time:.2f} seconds")
+            console.print(f"Correct! Time taken: {end_time - start_time:.2f} seconds", style="bold green")
             return challenge["solution"]
-        else:
-            attempts += 1
-            console.print(f"Incorrect. {max_attempts - attempts} attempts remaining.", style="bold red")
+
+        attempts += 1
+        console.print(f"Incorrect. {max_attempts - attempts} attempts remaining.", style="bold red")
 
     end_time = time.time()
-    print(f"Time taken: {end_time - start_time:.2f} seconds")
+    console.print(f"Time taken: {end_time - start_time:.2f} seconds", style="bold red")
     console.print(f"Unfortunately, you didn't get the correct answer. The correct answer was '{challenge['text_solution']}'.", style="bold red")
     return None
 
@@ -319,29 +323,47 @@ def decrypt_email(user_name, rotor_hint, ring_hint, plugboard_hint, encrypted_me
     print(f"Ring Settings (Hint): {ring_hint if ring_hint else 'No specific hint, refer to the challenge solution.'}")
     print(f"Plugboard Settings (Hint): {plugboard_hint if plugboard_hint else 'No specific hint, refer to the challenge solution.'}")
 
-    rotor_positions = input(f"Enter the rotor positions (Hint was {rotor_hint}): ").upper() if rotor_hint else "AAA"
-    ring_settings_input = input(f"Enter the ring settings as three numbers separated by spaces (Hint: {ring_hint if ring_hint else 'No hint'}): ")
-    plugboard_settings = input(f"Enter the plugboard settings as pairs of letters separated by spaces (Hint: {plugboard_hint if plugboard_hint else 'No hint'}): ")
+    while True:
+        rotor_positions = input(f"Enter the rotor positions (Hint was {rotor_hint}): ").upper()
+        if " " in rotor_positions or not rotor_positions:
+            console.print("Invalid input. Please enter the rotor positions without spaces and cannot be empty.", style="bold red")
+            continue
+        break
 
-    # Convert the ring settings input to list of integers
-    ring_settings = [int(x) for x in ring_settings_input.split()]
+    while True:
+        ring_settings_input = input(f"Enter the ring settings as three numbers separated by spaces (Hint: {ring_hint if ring_hint else 'No hint'}): ")
+        if "  " in ring_settings_input or not ring_settings_input.strip():
+            console.print("Invalid input. Please enter three numbers separated by a single space and cannot be empty.", style="bold red")
+            continue
+        ring_settings = ring_settings_input.split()
+        if len(ring_settings) != 3 or not all(num.isdigit() for num in ring_settings):
+            console.print("Invalid input. Please enter exactly three numbers separated by spaces.", style="bold red")
+            continue
+        ring_settings = [int(num) for num in ring_settings]
+        break
+
+    while True:
+        plugboard_settings = input(f"Enter the plugboard settings as pairs of letters separated by spaces (Hint: {plugboard_hint if plugboard_hint else 'No hint'}): ")
+        if "  " in plugboard_settings or not plugboard_settings.strip():
+            console.print("Invalid input. Please enter pairs of letters separated by a single space and cannot be empty.", style="bold red")
+            continue
+        plugboard_pairs = plugboard_settings.upper().split()
+        if any(len(pair) != 2 for pair in plugboard_pairs) or not all(pair.isalpha() for pair in plugboard_pairs):
+            console.print("Invalid input. Please enter valid letter pairs (e.g., 'AB CD').", style="bold red")
+            continue
+        break
+
     enigma = setup_enigma_machine(ring_settings)
-
     enigma.set_display(rotor_positions)
-
-    # Decrypt the message
     decrypted_message = enigma.process_text(encrypted_message)
     console.print(f"\nDecrypted message: {decrypted_message}\n", style="bold underline cyan")
-
     table = Table(title="Challenge Summary")
     table.add_column("Challenge", style="cyan", no_wrap=True)
     table.add_column("Status", style="magenta")
     table.add_row("Rotor Position", "Completed")
     table.add_row("Ring Setting", "Completed")
     table.add_row("Plugboard Setting", "Completed")
-
     console.print(table)
-
     console.print(Panel("Congratulations, you've completed your mission!", title="Mission Complete", style="bold green"))
 
 def clear_screen():
