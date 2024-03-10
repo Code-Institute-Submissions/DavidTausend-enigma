@@ -11,6 +11,9 @@ from rich.console import Console
 
 console = Console()
 
+# https://docs.python.org/3/library/os.html
+import os
+
 # https://www.toppr.com/ask/
 challenges = {
     "rotor_position": [
@@ -322,10 +325,22 @@ def decrypt_email(user_name, rotor_hint, ring_hint, plugboard_hint, encrypted_me
     decrypted_message = enigma.process_text(encrypted_message)
     print(f"\nDecrypted message: {decrypted_message}")
 
+def clear_screen():
+    """
+    Clears the console screen.
+    """
+    # For Windows
+    if os.name == 'nt':
+        os.system('cls')
+    # For Linux/Mac
+    else:
+        os.system('clear')
+
 def run_game():
     """
-    Run program functions
+    Run program functions.
     """
+    clear_screen()
     menu()
     
 print("\nWelcome the russian enigme game\n") 
