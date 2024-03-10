@@ -148,9 +148,17 @@ def instructions():
 
 def about():
     """
-    Information about the game
+    Information about the game.
     """
     clear_screen()
+    console.print("[bold magenta]About the Game[/bold magenta]\n", justify="center")
+    console.print("In a world where secret communications can alter the course of history, one machine stood out for its complexity and effectiveness: the Enigma. Used during a tumultuous time in human history, it encrypted messages that, if fallen into the wrong hands, could have changed the outcome of significant events.", style="italic")
+    console.print("\nIn this game, you step into the shoes of a cryptanalyst during a critical period. Tasked with decrypting crucial messages, your success or failure could very well determine the fate of nations. Armed with your wit, intuition, and an understanding of the Enigma machine, you'll face various challenges that will test your decoding skills to the utmost.")
+    console.print("\nAs you navigate through the puzzles and riddles, remember that each solved challenge brings you one step closer to unveiling secrets meant for only a select few. The challenges you face are inspired by historical scenarios, although with a twist of fiction to enhance the gaming experience.")
+    console.print("\n[bold green]Are you ready to embark on this thrilling adventure, unravel the mysteries, and perhaps alter the course of history? Welcome to 'The Enigma Challenge.'[/bold green]", justify="center")
+    console.print("\nPress enter to return to the main menu.")
+    input()
+    menu()
 
 def get_random_challenge(challenge_type):
     """
