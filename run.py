@@ -8,6 +8,8 @@ import time
 
 # https://github.com/Textualize/rich
 from rich.console import Console
+from rich.panel import Panel
+from rich.table import Table
 
 console = Console()
 
@@ -61,7 +63,7 @@ def menu():
 
     # https://stackoverflow.com/questions/19964603/creating-a-menu-in-python
     while True:
-        print("\nMain Menu:\n")
+        console.print("Main Menu:", style="bold blue underline")
         print("1. Start Game - Begin your adventure and tackle the challenges.")
         print("2. Instructions - Learn how to play and what to expect.")
         print("3. About - Discover the story behind the game.")
@@ -79,7 +81,7 @@ def menu():
             print("\nExiting the game. Goodbye!\n")
             break
         else:
-            print("Invalid choice. Please enter 1, 2, 3 or 4.")
+            console.print("Invalid choice. Please enter 1, 2, 3 or 4.", style="bold red")
 
 def user():
     """
@@ -322,7 +324,18 @@ def decrypt_email(user_name, rotor_hint, ring_hint, plugboard_hint, encrypted_me
 
     # Decrypt the message
     decrypted_message = enigma.process_text(encrypted_message)
-    print(f"\nDecrypted message: {decrypted_message}")
+    console.print(f"\nDecrypted message: {decrypted_message}\n", style="bold underline cyan")
+
+    table = Table(title="Challenge Summary")
+    table.add_column("Challenge", style="cyan", no_wrap=True)
+    table.add_column("Status", style="magenta")
+    table.add_row("Rotor Position", "Completed")
+    table.add_row("Ring Setting", "Completed")
+    table.add_row("Plugboard Setting", "Completed")
+
+    console.print(table)
+
+    console.print(Panel("Congratulations, you've completed your mission!", title="Mission Complete", style="bold green"))
 
 def clear_screen():
     """
