@@ -23,7 +23,7 @@ challenges = {
          "hint": "It's a famous three-letter agency.",
          "solution": "FBI"},
         {"challenge": "Decrypt 'UGM' to find the initial rotor positions.",
-         "hint": "A precious yellow metal.",
+         "hint": "A precious yellow metal (3 Letters).",
          "solution": "GLD"}
     ],
     "ring_setting": [
