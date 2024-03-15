@@ -14,8 +14,6 @@
 
 ## Introduction
 
-<div align="center"><img src="assets/images/readme/introduction/web_preview.webp"></div>
-
 "Enigma" is a thrilling game that casts you as a cryptanalyst diving into the world of historical cryptography with the Enigma machine. Your mission is to decode messages and solve puzzles, drawing on history and strategy. It's an engaging blend of logic, deduction, and historical intrigue, where each solved puzzle brings you closer to averting a global crisis. Embark on this captivating journey where your wit can change history. Welcome to "Enigma."
 
 <br>

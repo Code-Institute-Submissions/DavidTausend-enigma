@@ -83,48 +83,6 @@ def menu():
         else:
             console.print("\nInvalid choice. Please enter a number between 1 and 4.\n", style="bold red")
 
-def user():
-    """
-    Save the user name
-    """
-    clear_screen()
-    console.print("Welcome to the Adventure!", style="bold magenta")
-
-    # Age Verification
-    while True:
-        user_age = input("\nPlease enter your age to start the game: ")
-        if user_age.isdigit() and int(user_age) >= 18:
-            break
-        elif user_age.isdigit() and int(user_age) < 18:
-            console.print("You are too young to risk your life, wait until you are older.\n", style="bold red")
-            return
-        else:
-            console.print("Invalid input. Please enter a valid number for age.", style="bold red")
-
-    # Name Input
-    while True:
-        user_name = input("\nEnter your name to embark on a thrilling adventure filled with mystery and intrigue: ").strip()
-        if user_name:
-            break
-        console.print("Name cannot be empty. Please enter a valid name.", style="bold red")
-
-    rotor_positions = rotor_position_challenge()
-    if not rotor_positions:
-        console.print("Failed to obtain rotor positions. Cannot proceed.")
-        return
-
-    ring_hint = ring_setting_challenge()
-    if not ring_hint:
-        console.print("Failed to obtain ring settings. Cannot proceed with email encryption.")
-        return
-
-    plugboard_hint = plugboard_challenge()
-    email_content, encrypted_email = email(user_name, ring_hint, rotor_positions)
-    console.print(email_content, style="bold green")
-    
-    # Decrypt with hints
-    decrypt_email(user_name, rotor_positions, ring_hint, plugboard_hint, encrypted_email) 
-
 def instructions():
     """
     User instructions of the game
@@ -160,6 +118,83 @@ def about():
     input()
     menu()
 
+def user():
+    """
+    Save the user name and manage the game flow, including challenges and final decryption.
+    """
+    clear_screen()
+    console.print("Welcome to the Adventure!", style="bold magenta")
+
+    # Age Verification
+    while True:
+        user_age = input("\nPlease enter your age to start the game: ")
+        if user_age.isdigit() and int(user_age) >= 18:
+            break
+        elif user_age.isdigit() and int(user_age) < 18:
+            console.print("You are too young to risk your life, wait until you are older.\n", style="bold red")
+            return
+        else:
+            console.print("Invalid input. Please enter a valid number for age.", style="bold red")
+
+    # Name Input
+    user_name = input("\nEnter your name to embark on a thrilling adventure filled with mystery and intrigue: ").strip()
+    if not user_name:
+        console.print("Name cannot be empty. Please enter a valid name.", style="bold red")
+        return
+
+    # Initialize total time for all challenges
+    total_time = 0
+
+    # Rotor Position Challenge
+    rotor_time, rotor_positions = rotor_position_challenge()
+    if rotor_positions is None:
+        console.print("Failed to obtain rotor positions. Cannot proceed.")
+        return
+
+
+    # Ring Setting Challenge
+    ring_time, ring_hint = ring_setting_challenge()
+    if ring_hint:
+        total_time += ring_time
+    else:
+        console.print("Failed to obtain ring settings. Cannot proceed with email encryption.")
+        return
+
+    # Plugboard Challenge
+    plugboard_time, plugboard_hint = plugboard_challenge()
+    if plugboard_hint:
+        total_time += plugboard_time
+    else:
+        console.print("Failed to obtain plugboard settings. Cannot proceed with decryption.")
+        return
+
+    # Ensure you're passing string values to functions that expect them
+    # For example, if 'rotor_positions' is not a string, you need to handle that
+    rotor_positions_str = ''.join(rotor_positions) if isinstance(rotor_positions, list) else rotor_positions
+
+    # Display the encrypted email content
+    email_content, encrypted_email = email(user_name, ring_hint, rotor_positions_str)
+    console.print(email_content, style="bold green")
+    
+    # Decrypt with hints
+    decrypt_email(user_name, rotor_positions_str, ring_hint, plugboard_hint, encrypted_email)
+
+    # Display total time taken for all challenges at the end
+    console.print(Panel(f"Total time taken for all challenges: [bold]{total_time:.2f} seconds[/bold]",
+                        title="Challenge Time Summary", style="bold blue"))
+
+def display_time(times):
+    """
+    Display global challenge timer at the end of the game.
+    """
+    console.print("\n[bold underline]Challenge Time Summary:[/bold underline]")
+    table = Table(show_header=True, header_style="bold magenta")
+    table.add_column("Challenge", style="dim")
+    table.add_column("Time Taken (seconds)", justify="right")
+    for challenge, time_taken in times.items():
+        table.add_row(challenge, f"{time_taken:.2f}")
+    console.print(table)
+
 def get_random_challenge(challenge_type):
     """
     Randomly chosse a challenge question
@@ -177,7 +212,6 @@ def rotor_position_challenge():
     console.print(f"\nRotor Position Challenge: {challenge['challenge']}\nHint: {challenge['hint']}", style="bold yellow")
 
     attempts, max_attempts = 0, 3
-
     # Start the timer
     start_time = time.time()
 
@@ -186,24 +220,19 @@ def rotor_position_challenge():
         if " " in answer:
             console.print("Spaces are not allowed. Please enter your answer without spaces.", style="bold red")
             continue
-
         if answer == challenge["solution"]:
-            
             # Stop timer and calculate duration
             end_time = time.time()
             console.print(f"Correct! Time taken: {end_time - start_time:.2f} seconds", style="bold green")
-            return challenge["solution"]
+            return end_time - start_time, challenge["solution"] 
 
         attempts += 1
-        remaining_attempts = max_attempts - attempts
-        console.print(f"Incorrect. {remaining_attempts} {'attempt' if remaining_attempts == 1 else 'attempts'} remaining.", style="bold red")
+        console.print(f"Incorrect. {max_attempts - attempts} attempts remaining.", style="bold red")
 
     # Stop timer and calculate duration if max attempts reached
     end_time = time.time()
-    console.print(f"Time taken: {end_time - start_time:.2f} seconds", style="bold red")
-    console.print(f"The correct answer was '{challenge['solution']}'. No hints for rotor positions.", style="bold red")
-    return None
-
+    console.print(f"Unfortunately, you didn't get the correct answer. The correct answer was '{challenge['solution']}'.", style="bold red")
+    return end_time - start_time, None
 
 def ring_setting_challenge():
     """
@@ -214,33 +243,29 @@ def ring_setting_challenge():
     console.print(f"\nRing Setting Challenge: {challenge['challenge']}\nHint: {challenge['hint']}", style="bold yellow")
 
     attempts, max_attempts = 0, 3
-
     # Start the timer
     start_time = time.time()
 
     while attempts < max_attempts:
         answer = input("\nYour answer: ").strip().lower()
-
         if " " in answer:
             console.print("Spaces are not allowed. Please enter your answer without spaces.", style="bold red")
             continue
 
         if answer == challenge["text_solution"]:
-
             # Stop timer and calculate duration
             end_time = time.time()
             console.print(f"Correct! Time taken: {end_time - start_time:.2f} seconds", style="bold green")
-            return challenge["solution"]
+            return end_time - start_time, challenge["solution"]
 
         attempts += 1
-        remaining_attempts = max_attempts - attempts
-        console.print(f"Incorrect. {remaining_attempts} {'attempt' if remaining_attempts == 1 else 'attempts'} remaining.", style="bold red")
+        console.print(f"Incorrect. {max_attempts - attempts} attempts remaining.", style="bold red")
 
     # Stop timer and calculate duration if max attempts reached
     end_time = time.time()
     console.print(f"Time taken: {end_time - start_time:.2f} seconds", style="bold red")
-    console.print(f"The correct answer was '{challenge['text_solution']}'. No hints for ring settings.", style="bold red")
-    return None
+    console.print(f"The correct answer was '{challenge['text_solution']}'.", style="bold red")
+    return end_time - start_time, None
 
 def plugboard_challenge():
     """
@@ -255,7 +280,6 @@ def plugboard_challenge():
 
     while attempts < max_attempts:
         answer = input("\nYour answer: ").strip().lower()
-
         if " " in answer:
             console.print("Spaces are not allowed. Please enter your answer without spaces.", style="bold red")
             continue
@@ -263,15 +287,15 @@ def plugboard_challenge():
         if answer == challenge["text_solution"]:
             end_time = time.time()
             console.print(f"Correct! Time taken: {end_time - start_time:.2f} seconds", style="bold green")
-            return challenge["solution"]
+            return end_time - start_time, challenge["solution"]
 
         attempts += 1
         console.print(f"Incorrect. {max_attempts - attempts} attempts remaining.", style="bold red")
 
     end_time = time.time()
     console.print(f"Time taken: {end_time - start_time:.2f} seconds", style="bold red")
-    console.print(f"Unfortunately, you didn't get the correct answer. The correct answer was '{challenge['text_solution']}'.", style="bold red")
-    return None
+    console.print(f"The correct answer was '{challenge['text_solution']}'.", style="bold red")
+    return end_time - start_time, None
 
 def setup_enigma_machine(ring_settings):
     """
