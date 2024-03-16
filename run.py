@@ -1,10 +1,9 @@
 import random
+import time
+import os
 
 # https://pypi.org/project/py-enigma/
 from enigma.machine import EnigmaMachine
-
-# https://docs.python.org/3/library/time.html
-import time
 
 # https://github.com/Textualize/rich
 from rich.console import Console
@@ -12,9 +11,6 @@ from rich.panel import Panel
 from rich.table import Table
 
 console = Console()
-
-# https://docs.python.org/3/library/os.html
-import os
 
 # https://www.toppr.com/ask/
 challenges = {
@@ -27,7 +23,7 @@ challenges = {
          "solution": "GLD"}
     ],
     "ring_setting": [
-         {"challenge": "I am always hungry, I must always be fed. The finger I touch will soon turn red. What am I?",
+        {"challenge": "I am always hungry, I must always be fed. The finger I touch will soon turn red. What am I?",
          "hint": "I can be found in every home and am essential for cooking, but be careful not to get too close.",
          "text_solution": "fire",
          "solution": [5, 18, 21]},
@@ -85,7 +81,7 @@ def menu():
 
 def instructions():
     """
-    User instructions of the game
+    User instructions of the game.
     """
     clear_screen()
     print("\nInstructions:")
@@ -197,7 +193,7 @@ def display_time(times):
 
 def get_random_challenge(challenge_type):
     """
-    Randomly chosse a challenge question
+    Randomly chosse a challenge question.
     """
     challenge_pool = challenges[challenge_type]
     selected_challenge = random.choice(challenge_pool)
@@ -273,7 +269,8 @@ def plugboard_challenge():
     """
     clear_screen()
     challenge = get_random_challenge("plugboard_setting")
-    console.print(f"\nPlugboard Challenge: {challenge['challenge']}\nHint: {challenge['hint']}", style="bold yellow")
+    console.print(f"\nPlugboard Challenge: " 
+                    + f"{challenge['challenge']}\nHint: {challenge['hint']}", style="bold yellow")
 
     attempts, max_attempts = 0, 3
     start_time = time.time()
@@ -330,7 +327,7 @@ def generate_email(user_name, ring_settings, rotor_positions):
     sender = "secretagent@" + random.choice(["gmail.com", "yahoo.com", "hotmail.com", "gmx.com", "outlook.com", "codeinstitute.net"])
     receiver = f"{user_name}@" + random.choice(["gmail.com", "yahoo.com", "hotmail.com", "gmx.com", "outlook.com", "codeinstitute.net"])
     subject = "Top Secret Mission"
-    body_plaintext = f"Hello{user_name}congratulationsyoucompletedyourmission"
+    body_plaintext = f"Hello {user_name} congratulations you completed your mission"
 
     # Set up the Enigma machine for the email
     enigma = setup_enigma_machine(ring_settings)
@@ -416,5 +413,5 @@ def run_game():
     clear_screen()
     menu()
     
-print("\nWelcome the russian enigme game\n") 
+print("\nWelcome to the enigme game\n") 
 run_game()
