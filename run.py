@@ -140,6 +140,10 @@ def user():
         else:
             console.print("Invalid name. Please enter a name using alphabetic characters only, without numbers or special characters.", style="bold red")
 
+    # Story Challenge
+    story_challenge()
+    enigma_key_challenge()
+
     # Initialize total time for all challenges
     total_time = 0
 
@@ -201,6 +205,56 @@ def get_random_challenge(challenge_type):
     selected_challenge = random.choice(challenge_pool)
     return selected_challenge
 
+def story_challenge():
+    """
+    User needs to guess a coponent of the engima machine.
+    """
+    clear_screen()
+    console.print("The Lost Engineer:", style="bold magenta", justify="center")
+    console.print("You've come across a diary belonging to an engineer who vanished in the last days of the war. The diary mentions a crucial part of the Enigma he was working on. This component is key to your mission.")
+
+    diary_entry = """...Despite the chaos, I continue my work on the machines. The [???] is particularly fascinating, with its ability to transform each letter through a complex series of electrical paths. It's this component that might hold the key to our communications staying secure..."""
+
+    console.print(f"\nDiary Entry:\n{diary_entry}", style="italic")
+    console.print("\nHint: This Enigma component was pivotal for scrambling letters. It's mentioned in the diary entry.", style="bold yellow")
+
+    attempts, max_attempts = 0, 3
+
+    while attempts < max_attempts:
+        answer = input("\nIdentify the component: ").strip().upper()
+
+        if answer == "ROTOR":
+            console.print("Correct! The rotors were indeed the heart of the Enigma's scrambling mechanism.", style="bold green")
+            break
+        else:
+            attempts += 1
+            console.print(f"Incorrect. Try again. {max_attempts - attempts} attempts left.", style="bold red")
+
+    if attempts == max_attempts:
+        console.print("Unfortunately, you couldn't identify the component. It was the 'ROTOR'. This key piece will lead you to your next challenges.", style="bold red")
+    else:
+        console.print("With the knowledge of the rotor's importance, you proceed to uncover more about the Enigma machine.", style="bold green")
+
+    input("\nPress enter to continue...")
+
+def enigma_key_challenge():
+    """
+    User needs to guess the daily key setting of the Enigma machine.
+    """
+    clear_screen()
+    console.print("[bold magenta]The Enigma Key Challenge[/bold magenta]\n", justify="center")
+
+    console.print("Hint: To decrypt today's messages, the Enigma operators aligned the rotors to a specific starting position, which is widely recognized as a standard initial setting. What could it be?", style="bold cyan")
+
+    key_guess = input("\nGuess the daily key setting (e.g., AAA, ABC): ").strip().upper()
+
+    if key_guess in ["AAA", "ABC"]:  
+        console.print("\nCorrect! The daily key setting was indeed a simple starting position like 'AAA' or 'ABC'. This setting was the foundation for all subsequent operations each day.", style="bold green")
+    else:
+        console.print("\nIncorrect. The daily key setting was something simple and widely recognized, like 'AAA' or 'ABC'. This initial step was crucial for setting up the machine.", style="bold red")
+
+    input("\nPress enter to continue to the main challenges...")
+
 def rotor_position_challenge():
     """
     User Challenge to find initial rotor position with a timer.
@@ -210,6 +264,7 @@ def rotor_position_challenge():
     console.print(f"\nRotor Position Challenge: {challenge['challenge']}\nHint: {challenge['hint']}", style="bold yellow")
 
     attempts, max_attempts = 0, 3
+
     # Start the timer
     start_time = time.time()
 
@@ -219,6 +274,7 @@ def rotor_position_challenge():
             console.print("Spaces are not allowed. Please enter your answer without spaces.", style="bold red")
             continue
         if answer == challenge["solution"]:
+
             # Stop timer and calculate duration
             end_time = time.time()
             console.print(f"Correct! Time taken: {end_time - start_time:.2f} seconds", style="bold green")
@@ -241,6 +297,7 @@ def ring_setting_challenge():
     console.print(f"\nRing Setting Challenge: {challenge['challenge']}\nHint: {challenge['hint']}", style="bold yellow")
 
     attempts, max_attempts = 0, 3
+
     # Start the timer
     start_time = time.time()
 
@@ -251,6 +308,7 @@ def ring_setting_challenge():
             continue
 
         if answer == challenge["text_solution"]:
+
             # Stop timer and calculate duration
             end_time = time.time()
             console.print(f"Correct! Time taken: {end_time - start_time:.2f} seconds", style="bold green")
