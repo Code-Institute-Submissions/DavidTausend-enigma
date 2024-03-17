@@ -81,24 +81,23 @@ def menu():
 
 def instructions():
     """
-    User instructions of the game.
+    User instructions for the game.
     """
     clear_screen()
-    print("\nInstructions:")
-    print("1. Start the game by entering your name. You must be at least 18 years old to play.")
-    print("2. You will face three challenges designed to test your decryption skills and provide hints for the final task:")
-    print("   a. Rotor Position Challenge: Decrypt a code to find the initial rotor positions of the Enigma machine.")
-    print("   b. Ring Setting Challenge: Solve a puzzle to discover the ring settings.")
-    print("   c. Plugboard Challenge: Answer a riddle to get a hint for the plugboard settings.")
-    print("3. After successfully completing the challenges, you will receive an encrypted email. The email contains a secret mission that you must decrypt using the Enigma machine.")
-    print("4. Use the hints from the challenges to configure the Enigma machine for decryption:")
-    print("   a. Enter the rotor positions as hinted by the Rotor Position Challenge (e.g., 'kab').")
-    print("   b. Input the ring settings as three numbers separated by spaces, based on the Ring Setting Challenge (e.g., '0 0 7').")
-    print("   c. Provide the plugboard settings as pairs of letters separated by spaces, as indicated by the Plugboard Challenge (e.g., 'dt fp').")
-    print("5. Decrypt the message to uncover the secret mission. Correct decryption will reveal a coherent message congratulating you on completing your mission.")
-    print("6. Completing the mission successfully will prevent WWIII and win the war.")
-    print("\nGood luck, agent! The fate of the world rests in your hands.\n")
-   
+    console.print("[bold]Instructions:[/bold]", justify="center")
+    console.print("1. Start the game by entering your name. You must be at least 18 years old to play.")
+    console.print("2. You will face a series of challenges designed to test your decryption skills and provide hints for the final task:")
+    console.print("   a. Rotor Position Challenge: Decrypt a code to find the initial rotor positions of the Enigma machine.")
+    console.print("   b. Ring Setting Challenge: Solve a puzzle to discover the ring settings.")
+    console.print("   c. Plugboard Challenge: Answer a riddle to get a hint for the plugboard settings.")
+    console.print("3. After successfully completing the challenges, you will receive an encrypted email. The email contains a secret mission that you must decrypt using the Enigma machine.")
+    console.print("4. Use the hints from the challenges to configure the Enigma machine for decryption:")
+    console.print("   a. Enter the rotor positions as hinted by the Rotor Position Challenge (e.g., 'kab').")
+    console.print("   b. Input the ring settings as three numbers separated by spaces, based on the Ring Setting Challenge (e.g., '0 0 7').")
+    console.print("   c. Provide the plugboard settings as pairs of letters separated by spaces, as indicated by the Plugboard Challenge (e.g., 'dt fp').")
+    console.print("5. Decrypt the message to uncover the secret mission. Correct decryption will reveal a coherent message congratulating you on completing your mission.")
+    console.print("6. Completing the mission successfully will prevent WWIII and win the war.")
+    console.print("\nGood luck, agent! The fate of the world rests in your hands.\n")
 
 def about():
     """
@@ -119,7 +118,7 @@ def user():
     Save the user name and manage the game flow, including challenges and final decryption.
     """
     clear_screen()
-    console.print("Welcome to the Adventure!", style="bold magenta")
+    console.print("Welcome to the Adventure!", style="bold magenta", justify="center")
 
     # Age Verification
     while True:
