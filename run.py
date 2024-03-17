@@ -133,10 +133,12 @@ def user():
             console.print("Invalid input. Please enter a valid number for age.", style="bold red")
 
     # Name Input
-    user_name = input("\nEnter your name to embark on a thrilling adventure filled with mystery and intrigue: ").strip()
-    if not user_name:
-        console.print("Name cannot be empty. Please enter a valid name.", style="bold red")
-        return
+    while True:
+        user_name = input("\nEnter your name to embark on a thrilling adventure filled with mystery and intrigue: ").strip()
+        if user_name and user_name.replace(" ", "").isalpha():
+            break
+        else:
+            console.print("Invalid name. Please enter a name using alphabetic characters only, without numbers or special characters.", style="bold red")
 
     # Initialize total time for all challenges
     total_time = 0
