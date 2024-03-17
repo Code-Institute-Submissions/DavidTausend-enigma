@@ -1,6 +1,6 @@
 <h1 align="center">Engima</h1>
 
-<img src="/assets/images/enigma_machine.webp" alt="Enigma machine picture">
+<img src="/assets/readme/enigma_machine.webp" alt="Enigma machine picture">
 
 <h3 align="center"><a href="https://engima-machine-86a7a1dfa74a.herokuapp.com/">➡️ View the live project here ⬅️</a></h3>
 

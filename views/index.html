@@ -15,7 +15,6 @@
         }
 
         #terminal {
-            width: 100%;
             max-width: 800px;
         }
 
@@ -30,6 +29,10 @@
 
     <script>
         var term = new Terminal({
+            theme: {
+                background: "../assets/images/background/enigma_machine.webp",
+            },
+            cursorBlink: true,
             cols: 80,
             rows: 24
         });
