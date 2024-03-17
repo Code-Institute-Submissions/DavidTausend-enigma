@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Centered Terminal and Button</title>
+    <title>Engima Website</title>
     <style>
         body {
             display: flex;
@@ -12,14 +12,18 @@
             justify-content: center;
             height: 100vh;
             margin: 0;
+            background: url("../assets/images/background/enigma_machine.webp");
+            background-size: cover;
         }
 
         #terminal {
+            width: 100%;
             max-width: 800px;
+            border: 1px solid #333;
         }
-
         button {
             margin-top: 20px;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -30,7 +34,26 @@
     <script>
         var term = new Terminal({
             theme: {
-                background: "../assets/images/background/enigma_machine.webp",
+                background: '#1D1F21',
+                foreground: '#C5C8C6',
+                cursor: '#F0C674',
+                selection: 'rgba(255, 255, 255, 0.3)',
+                black: '#1D1F21',
+                red: '#CC342B',
+                green: '#198844',
+                yellow: '#FBA922',
+                blue: '#3971ED',
+                magenta: '#A36AC7',
+                cyan: '#3971ED',
+                white: '#C5C8C6',
+                brightBlack: '#969896',
+                brightRed: '#CC342B',
+                brightGreen: '#198844',
+                brightYellow: '#FBA922',
+                brightBlue: '#3971ED',
+                brightMagenta: '#A36AC7',
+                brightCyan: '#3971ED',
+                brightWhite: '#FFFFFF'
             },
             cursorBlink: true,
             cols: 80,
@@ -50,7 +73,6 @@
         ws.onerror = function (e) {
             console.log(e);
         };
-        // Set focus in the terminal
         document.getElementsByClassName("xterm-helper-textarea")[0].focus();
     </script>
 </body>
