@@ -2,13 +2,11 @@
 
 <img src="/assets/images/enigma_machine.webp" alt="Enigma machine picture">
 
-<h3 align="center"><a href="">➡️ View the live project here ⬅️</a></h3>
+<h3 align="center"><a href="https://engima-machine-86a7a1dfa74a.herokuapp.com/">➡️ View the live project here ⬅️</a></h3>
 
 <br/>
 
 <div align="center">
-
-![W3C Validation]()
 
 </div>
 
