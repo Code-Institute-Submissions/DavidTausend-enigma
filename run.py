@@ -140,7 +140,7 @@ def user():
         else:
             console.print("Invalid name. Please enter a name using alphabetic characters only, without numbers or special characters.", style="bold red")
 
-    # Story Challenge
+    introduction_to_enigma()
     story_challenge()
     enigma_key_challenge()
 
@@ -152,7 +152,6 @@ def user():
     if rotor_positions is None:
         console.print("Failed to obtain rotor positions. Cannot proceed.")
         return
-
 
     # Ring Setting Challenge
     ring_time, ring_hint = ring_setting_challenge()
@@ -169,9 +168,7 @@ def user():
     else:
         console.print("Failed to obtain plugboard settings. Cannot proceed with decryption.")
         return
-
-    # Ensure you're passing string values to functions that expect them
-    # For example, if 'rotor_positions' is not a string, you need to handle that
+    
     rotor_positions_str = ''.join(rotor_positions) if isinstance(rotor_positions, list) else rotor_positions
 
     # Display the encrypted email content
@@ -184,6 +181,33 @@ def user():
     # Display total time taken for all challenges at the end
     console.print(Panel(f"Total time taken for all challenges: [bold]{total_time:.2f} seconds[/bold]",
                         title="Challenge Time Summary", style="bold blue"))
+
+def introduction_to_enigma():
+    """
+    Introduction to the Enigma machine and the game's challenges.
+    """
+    clear_screen()
+    console.print("[bold magenta]Welcome to The Enigma Adventure![/bold magenta]\n", justify="center")
+
+    intro_text = (
+        "The Enigma machine, a marvel of early 20th-century technology, was a sophisticated device used for encrypting and "
+        "decrypting secret messages. Originally developed for commercial use, it was famously adopted by the military forces "
+        "of several nations, most notably by Nazi Germany before and during World War II. The complexity of its encryption "
+        "mechanism, which involved a series of rotors and a plugboard, made it incredibly difficult for intercepted messages "
+        "to be deciphered, thus changing the course of espionage and secret communications.\n\n"
+        
+        "In this adventure, you'll step into the shoes of a cryptanalyst faced with the monumental task of cracking the "
+        "Enigma's codes. Through a series of challenges, you'll learn about the components and operations of the Enigma machine, "
+        "piece together its settings, and ultimately decrypt a secret message that could alter the outcome of a great conflict. "
+        "Each challenge is designed to test your problem-solving skills and give you a glimpse into the world of historical cryptography.\n\n"
+        
+        "Prepare yourself for a journey into the shadows of secret messages, where intuition, logic, and a keen eye for detail "
+        "will be your best tools. The fate of nations could rest on your ability to understand and operate the enigmatic Enigma machine.\n"
+    )
+    
+    console.print(intro_text, style="bold cyan")
+
+    input("\nPress enter to embark on your first challenge...")
 
 def display_time(times):
     """
@@ -243,9 +267,7 @@ def enigma_key_challenge():
     """
     clear_screen()
     console.print("[bold magenta]The Enigma Key Challenge[/bold magenta]\n", justify="center")
-
     console.print("Hint: To decrypt today's messages, the Enigma operators aligned the rotors to a specific starting position, which is widely recognized as a standard initial setting. What could it be?", style="bold cyan")
-
     key_guess = input("\nGuess the daily key setting (e.g., AAA, ABC): ").strip().upper()
 
     if key_guess in ["AAA", "ABC"]:  
@@ -290,7 +312,7 @@ def rotor_position_challenge():
 
 def ring_setting_challenge():
     """
-    User Challenge to find ring setting
+    User Challenge to find ring setting.
     """
     clear_screen()
     challenge = get_random_challenge("ring_setting")
@@ -424,10 +446,12 @@ def decrypt_email(user_name, rotor_hint, ring_hint, plugboard_hint, encrypted_me
         if "  " in ring_settings_input or not ring_settings_input.strip():
             console.print("Invalid input. Please enter three numbers separated by a single space and cannot be empty.", style="bold red")
             continue
+
         ring_settings = ring_settings_input.split()
         if len(ring_settings) != 3 or not all(num.isdigit() for num in ring_settings):
             console.print("Invalid input. Please enter exactly three numbers separated by spaces.", style="bold red")
             continue
+
         ring_settings = [int(num) for num in ring_settings]
         break
 
@@ -436,7 +460,9 @@ def decrypt_email(user_name, rotor_hint, ring_hint, plugboard_hint, encrypted_me
         if "  " in plugboard_settings or not plugboard_settings.strip():
             console.print("Invalid input. Please enter pairs of letters separated by a single space and cannot be empty.", style="bold red")
             continue
+
         plugboard_pairs = plugboard_settings.upper().split()
+
         if any(len(pair) != 2 for pair in plugboard_pairs) or not all(pair.isalpha() for pair in plugboard_pairs):
             console.print("Invalid input. Please enter valid letter pairs (e.g., 'AB CD').", style="bold red")
             continue
