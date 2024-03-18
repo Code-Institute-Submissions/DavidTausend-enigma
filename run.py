@@ -444,7 +444,8 @@ def decrypt_email(user_name, rotor_hint, ring_hint, plugboard_hint, encrypted_me
         break
 
     while True:
-        ring_settings_input = input(f"Enter the ring settings as three numbers separated by spaces (Hint: {ring_hint if ring_hint else 'No hint'}): ")
+        formatted_hint = ' '.join(map(str, ring_hint)) if ring_hint else 'No hint'
+        ring_settings_input = input(f"Enter the ring settings as three numbers separated by spaces (Hint: {formatted_hint}): ")
         if "  " in ring_settings_input or not ring_settings_input.strip():
             console.print("Invalid input. Please enter three numbers separated by a single space and cannot be empty.", style="bold red")
             continue
@@ -455,6 +456,10 @@ def decrypt_email(user_name, rotor_hint, ring_hint, plugboard_hint, encrypted_me
             continue
 
         ring_settings = [int(num) for num in ring_settings]
+        input_comparison = ' '.join(str(num) for num in ring_settings)
+        if ring_hint and input_comparison != formatted_hint:
+            console.print(f"Incorrect ring settings. Hint: {formatted_hint}", style="bold red")
+            continue
         break
 
     while True:
