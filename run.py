@@ -206,7 +206,7 @@ def introduction_to_enigma():
     
     console.print(intro_text, style="bold cyan")
 
-    input("\nPress enter to embark on your first challenge...")
+    input("Press enter to embark on your first challenge...")
 
 def display_time(times):
     """
@@ -438,6 +438,9 @@ def decrypt_email(user_name, rotor_hint, ring_hint, plugboard_hint, encrypted_me
         if " " in rotor_positions or not rotor_positions:
             console.print("Invalid input. Please enter the rotor positions without spaces and cannot be empty.", style="bold red")
             continue
+        if rotor_hint and rotor_positions != rotor_hint:
+            console.print(f"Incorrect rotor positions. Hint: {rotor_hint}", style="bold red")
+            continue
         break
 
     while True:
@@ -464,6 +467,9 @@ def decrypt_email(user_name, rotor_hint, ring_hint, plugboard_hint, encrypted_me
 
         if any(len(pair) != 2 for pair in plugboard_pairs) or not all(pair.isalpha() for pair in plugboard_pairs):
             console.print("Invalid input. Please enter valid letter pairs (e.g., 'AB CD').", style="bold red")
+            continue
+        if plugboard_hint and plugboard_settings.upper() != plugboard_hint.upper():
+            console.print(f"Incorrect plugboard settings. Hint: {plugboard_hint}", style="bold red")
             continue
         break
 
