@@ -1,6 +1,6 @@
 <h1 align="center">Engima</h1>
 
-<img src="/assets/readme/enigma_machine.webp" alt="Enigma machine picture">
+<img src="/assets/images/readme/enigma_machine.webp" alt="Enigma machine picture">
 
 <h3 align="center"><a href="https://engima-machine-86a7a1dfa74a.herokuapp.com/">➡️ View the live project here ⬅️</a></h3>
 
@@ -17,6 +17,60 @@
 <br>
 
 ## Table of Contents
+
+- [Introduction](#introduction)
+- [Table of Contents](#table-of-contents)
+- [User Experience (UX)](#user-experience--ux-)
+  * [User Stories](#user-stories)
+    + [User goals](#user-goals)
+    + [Company goals](#company-goals)
+- [Design](#design)
+  * [Typography](#typography)
+  * [Color Scheme](#color-scheme)
+  * [Wireframes](#wireframes)
+  * [Flowchart](#flowchart)
+- [Features](#features)
+  * [Menu](#menu)
+  * [Instructions](#instructions)
+  * [About](#about)
+  * [Exit](#exit)
+  * [Challenges](#challenges)
+  * [Encryption](#encryption)
+  * [Future Implementations](#future-implementations)
+    + [Additional Levels and Difficulty Settings](#additional-levels-and-difficulty-settings)
+    + [Enhanced User Interface](#enhanced-user-interface)
+    + [Multiplayer Mode](#multiplayer-mode)
+    + [Historical Missions](#historical-missions)
+    + [Learning Mode](#learning-mode)
+    + [Mobile Compatibility](#mobile-compatibility)
+  * [Programming Languages](#programming-languages)
+  * [Applications, Plugins & Tools Used](#applications--plugins---tools-used)
+- [Deployment & Local Development](#deployment---local-development)
+  * [Deployment](#deployment)
+  * [Local Development](#local-development)
+    + [How to Fork](#how-to-fork)
+    + [How to Clone](#how-to-clone)
+    + [Committing and Pushing Changes](#committing-and-pushing-changes)
+- [Testing](#testing)
+  * [Automated Testing](#automated-testing)
+    + [Validator Testing](#validator-testing)
+      - [HTML Validation](#html-validation)
+      - [CSS Validation](#css-validation)
+      - [PEP8 Validation](#pep8-validation)
+  * [Manual testing](#manual-testing)
+    + [User Stories Testing](#user-stories-testing)
+    + [Feature Testing](#feature-testing)
+  * [Bugs](#bugs)
+    + [Known Bugs](#known-bugs)
+    + [Solved Bugs](#solved-bugs)
+- [Credits](#credits)
+  * [Content](#content)
+    + [External Articles and Guides](#external-articles-and-guides)
+    + [Community Contributions and Forums](#community-contributions-and-forums)
+    + [Design and Spacing Techniques](#design-and-spacing-techniques)
+  * [Software Design Documentation](#software-design-documentation)
+  * [Media](#media)
+  * [Acknowledgments](#acknowledgments)
 
 [Generate TOC](https://ecotrust-canada.github.io/markdown-toc/)
 
@@ -60,6 +114,8 @@ The color palette is pivotal in creating an engaging user experience, drawing in
 This design strategy aims to merge the thematic elements of your project with contemporary design principles, ensuring a user-friendly and immersive experience.
 
 ### Wireframes
+
+### Flowchart
 
 ## Features
 
@@ -116,6 +172,9 @@ Ensure the game is optimized for mobile devices, allowing players to enjoy the g
 ### Programming Languages
 
 - [Python](<https://en.wikipedia.org/wiki/Python_(programming_language)>)
+- [HTML5](https://en.wikipedia.org/wiki/HTML5)
+- [CSS3](https://en.wikipedia.org/wiki/CSS)
+- [JavaScript](https://en.wikipedia.org/wiki/JavaScript)
 
 ### Applications, Plugins & Tools Used
 
@@ -141,11 +200,29 @@ Ensure the game is optimized for mobile devices, allowing players to enjoy the g
 
 [Python Tutor](https://pythontutor.com/javascript.html#mode=edit): An educational tool that provides a visual step-through of Python code execution, helping beginners understand how their code works under the hood.
 
+[Heroku](https://dashboard.heroku.com/login): Cloud platform for deploying and managing applications.
+
+[PEP](https://pep8ci.herokuapp.com/): Tool for checking Python code against PEP 8 standards.
+
 ## Deployment & Local Development
 
 ### Deployment
 
 ### Local Development
+
+The site is deployed using Heroku.
+
+To deploy the site using Heroku - [Heroku](https://engima-machine-86a7a1dfa74a.herokuapp.com/)
+
+1. Fork or clone this repository.
+2. Create a new Heroku app.
+3. Choose a region.
+4. Set the buildbacks to Python and NodeJS in that order.
+5. In Heroku's settings, add a config var of PORT and set the value to 8000.
+6. Link the Heroku app to the Github respository.
+7. Click on Deploy.
+
+The site has now been deployed. Please note that this process may take a few minutes before the site goes live.
 
 #### How to Fork
 
@@ -181,7 +258,11 @@ After making changes to your local copy, you can commit and push them to GitHub:
 
 #### Validator Testing
 
-##### Python
+##### HTML Validation
+
+##### CSS Validation
+
+##### PEP8 Validation
 
 ### Manual testing
 
@@ -191,23 +272,7 @@ After making changes to your local copy, you can commit and push them to GitHub:
 
 `Company Goals`
 
-#### Full Testing
-
-##### Devices
-
-- 24-inch Desktop Monitor
-- 14-inch MacBook Pro
-- 11 inch iPad Pro
-- iPhone 14 PRO Max
-- Samsung S20 Ultra
-
-##### Browsers
-
-- Google Chrome
-- Firefox
-- Safari
-- Edge
-- Samsung Internet
+#### Feature Testing
 
 <br>
 
@@ -223,15 +288,35 @@ After making changes to your local copy, you can commit and push them to GitHub:
 
 #### External Articles and Guides
 
+- Insight into the Enigma machine's mechanics and history was primarily drawn from Wikipedia's comprehensive article, providing an authentic backdrop for the game's narrative and challenges.
+
+- Advanced object-oriented programming concepts were reinforced through Real Python tutorials, which aided in structuring the game's code effectively.
+
 #### Community Contributions and Forums
+
+- The supportive community at Code Institute offered advice, code reviews, and motivation.
+
+- Various threads on Stack Overflow were instrumental in overcoming specific coding challenges and debugging.
 
 #### Design and Spacing Techniques
 
+- The game's user interface design was influenced by terminal-based games from the 1980s, with modern touches for readability and user experience, inspired by articles on Smashing Magazine.
+
 ### Software Design Documentation
+
+- Initial planning and documentation were supported by Lucidchart, which was used to create UML diagrams and flowcharts, mapping out the game's architecture and logic flow.
 
 ### Media
 
+- Enigma Machine Images: Historical images of the Enigma machine, used in the README and the game's introduction, were sourced from public domain collections to maintain historical accuracy and enhance immersion.
+
 ### Acknowledgments
+
+- Mentor Support: Immense gratitude to my mentor, Matt Bordden, for their guidance, insightful feedback, and encouragement throughout the development process.
+
+- Peer Feedback: Thanks to fellow Code Institute students who provided valuable feedback and suggestions during project development.
+
+- Family and Friends: A special thank you to my family and friends for their patience, support, and testing assistance, contributing to the refinement of the game's user experience.
 
 [Back to Top ^](#introduction)
 
