@@ -115,11 +115,41 @@ This design strategy aims to merge the thematic elements of your project with co
 
 ### Wireframes
 
+<img src="assets/images/readme/features/wireframe.webp">
+
+Wireframes are crucial in planning the layout and user flow of the "Enigma" game. They provide a visual representation of the game's structure, ensuring that all elements are logically arranged and accessible to the user. 
+
 ### Flowchart
+
+A flowchart provides a visual representation of the game's logic and user interaction flow. Below is the flowchart for the "Enigma" game, illustrating the sequential steps a player takes from the main menu through various game sections, challenges, and eventual completion or exit of the game.
+
+Flowchart Overview:
+
+1. Start: The player begins at the Main Menu, where they can choose to start the game, view instructions, learn about the Enigma machine in the About section, or exit the game.
+
+2. Instructions: If the player selects Instructions, they are taken to a page detailing how to play the game and use the Enigma machine simulator. After reading, they can return to the Main Menu.
+
+3. About: Selecting About takes the player to a page with historical information about the Enigma machine. They can return to the Main Menu after reading.
+
+4. Start Game: Choosing to start the game initiates the Challenges section.
+
+5. Challenges: The player faces a series of decryption challenges. Each challenge must be completed to unlock the next one. The challenges simulate the process of decoding messages using the Enigma machine.
+
+6. Encryption/Decryption Simulator: Alongside or after completing the challenges, players can access the simulator to practice encrypting and decrypting messages with customizable Enigma machine settings.
+
+7. Completion: Upon completing all challenges, the player is congratulated and can choose to explore more features, such as the Encryption/Decryption Simulator, or return to the Main Menu.
+
+8. Exit: At any point, the player can choose to exit the game from the Main Menu or via an in-game option.
+
+Flowchart Visualization:
+
+<img src="assets/images/readme/features/flowchart.webp">
 
 ## Features
 
 ### Menu
+
+<img src="assets/images/readme/features/">
 
 The main menu offers easy navigation to various sections like Instructions, About, Challenges, and Exit
 
@@ -135,13 +165,45 @@ Details the historical background of the Enigma machine and its significance.
 
 Allows users to easily exit the program with options.
 
+### Age Verification
+
+A prompt that ensures players meet the minimum age requirement, enhancing responsible gameplay.
+
+### User Name Input
+
+Allows players to enter their names, personalizing the game experience.
+
 ### Challenges
 
 Users can engage in various decryption challenges, enhancing their understanding of the Enigma machine.
 
+### Historical Missions
+
+Create missions inspired by real historical events involving the Enigma machine to add educational value.
+
+#### Rotor Position Challenge
+
+Players decrypt a code to discover the initial settings of the Enigma machine's rotors, simulating the task of historical codebreakers.
+
+#### Ring Setting Challenge
+
+Involves solving riddles or puzzles to deduce the Enigma machine's ring settings, adding depth to the decryption tasks.
+
+#### Plugboard Setting Challenge
+
+Players answer thematic riddles to gain insights into the correct plugboard configurations, further immersing them in the role of a cryptanalyst.
+
 ### Encryption
 
 The simulator enables users to encrypt and decrypt messages, experimenting with different machine settings.
+
+### Email Decryption
+
+A feature where players receive an encrypted email within the game, which they must decrypt using the hints obtained from challenges, tying together the skills practiced in previous tasks.
+
+### Time Tracking
+
+The game tracks the time taken to complete challenges, adding a competitive element and encouraging players to improve their decryption speed.
 
 ### Future Implementations
 
@@ -156,10 +218,6 @@ Upgrade the user interface for more intuitive interactions and visual appeal, ma
 #### Multiplayer Mode
 
 Add a competitive multiplayer mode, allowing players to challenge others in code-breaking duels.
-
-#### Historical Missions
-
-Create missions inspired by real historical events involving the Enigma machine to add educational value.
 
 #### Learning Mode
 
@@ -203,6 +261,8 @@ Ensure the game is optimized for mobile devices, allowing players to enjoy the g
 [Heroku](https://dashboard.heroku.com/login): Cloud platform for deploying and managing applications.
 
 [PEP](https://pep8ci.herokuapp.com/): Tool for checking Python code against PEP 8 standards.
+
+[Toppr](https://www.toppr.com/ask/):
 
 ## Deployment & Local Development
 
@@ -260,9 +320,15 @@ After making changes to your local copy, you can commit and push them to GitHub:
 
 ##### HTML Validation
 
+Utilized the W3C Markup Validation Service to verify the structure and syntax of the HTML content. This step helped identify and rectify markup errors or inconsistencies to ensure web standards compliance.
+
 ##### CSS Validation
 
+The W3C CSS Validation Service was used to check the styling sheets. This process helped in spotting any CSS issues or deviations from the CSS standards, ensuring the styling is robust and cross-browser compatible.
+
 ##### PEP8 Validation
+
+For Python code, PEP8 compliance was ensured using tools like flake8 or pycodestyle. This adherence to the Python community's style guide guarantees that the code is readable, maintainable, and follows the conventions understood by a broad base of Python developers.
 
 ### Manual testing
 
@@ -270,9 +336,40 @@ After making changes to your local copy, you can commit and push them to GitHub:
 
 `User Goals`
 
+| User Goals          | How are they achieved? |
+|---------------------|------------------------|
+| Engaging Challenges | The game introduces various levels and puzzles, each with unique challenges that test problem-solving skills and adapt to the player's growing capabilities. |
+| Learn through Play  | Historical facts and narratives about the Enigma machine and its significance during WWII are woven into the gameplay, providing an educational layer. |
+| Ease of Use         | A user-friendly interface, clear instructions, and responsive design ensure accessibility across different devices, providing a seamless gaming experience. |
+| Progress Indicators | Real-time feedback and progress tracking mechanisms such as scoreboards, level completion indicators, and achievement unlocks motivate players and highlight their advancement. |
+
+
 `Company Goals`
 
+| Company Goals      | How are they achieved? |
+|--------------------|------------------------|
+| Educate and Entertain | The game blends historical education with engaging puzzles, appealing to users interested in history and cryptography while ensuring they're entertained. |
+| Broad Accessibility | The game is designed to be cross-platform, ensuring users can access it on their preferred devices, enhancing user reach and engagement. |
+| Community Building | Features like leaderboards, user forums, or social media integration encourage community interaction, sharing of strategies, and user retention. |
+| Iterative Development | Continuous monitoring of user feedback and gameplay data to introduce new content, features, and improvements, ensuring the game remains relevant and enjoyable. |
+
 #### Feature Testing
+
+| Feature                  | Expected Outcome                                                             | Testing Performed                                 | Result                                           | Pass/Fail  |
+|--------------------------|------------------------------------------------------------------------------|---------------------------------------------------|--------------------------------------------------|------------|
+| Menu                     | Players can navigate through different options easily.                       | Navigate through each option in the main menu.    | All menu options work correctly and are intuitive. | Pass ✅    |
+| Instructions             | Players receive clear guidance on how to play the game.                      | View the instructions from the menu.              | Instructions are detailed and easy to understand.  | Pass ✅    |
+| About                    | Provide historical context and game background.                              | Access 'About' section from the menu.             | Contains informative content about the Enigma machine. | Pass ✅ |
+| Exit                     | Players can exit the game smoothly.                                          | Select 'Exit' from the main menu.                 | Game closes without issues.                         | Pass ✅    |
+| Age Verification         | Only players above a certain age can play.                                   | Input ages both above and below the threshold.    | Blocks underage players; allows others.            | Pass ✅    |
+| User Name Input          | Players can enter a username for a personalized experience.                  | Enter various usernames.                          | Accepts valid usernames; rejects invalid ones.     | Pass ✅    |
+| Rotor Position Challenge | Players must decrypt a message to find initial rotor positions.              | Attempt to solve the rotor position challenge.    | Challenge is solvable; provides correct rotor positions. | Pass ✅ |
+| Ring Setting Challenge   | Players solve a puzzle to find ring settings for decryption.                 | Attempt the ring setting challenge.               | Solvable with correct ring settings provided.      | Pass ✅    |
+| Plugboard Challenge      | Players must solve a riddle for plugboard settings.                          | Solve the plugboard challenge.                    | Correct plugboard settings are identifiable.       | Pass ✅    |
+| Encryption               | Players can encrypt and decrypt messages using Enigma settings.              | Encrypt and decrypt messages.                     | Accurate encryption and decryption of messages.    | Pass ✅    |
+| Email Decryption         | Players use hints to decrypt an email containing a secret mission.           | Use given hints to decrypt an email.              | Email is decrypted successfully, revealing the mission. | Pass ✅ |
+| Time Tracking            | Game tracks the total time taken for challenges and displays it at the end. | Complete all challenges and observe the total time. | Time is accurately recorded and displayed.        | Pass ✅    |
+
 
 <br>
 
@@ -288,7 +385,7 @@ After making changes to your local copy, you can commit and push them to GitHub:
 
 #### External Articles and Guides
 
-- Insight into the Enigma machine's mechanics and history was primarily drawn from Wikipedia's comprehensive article, providing an authentic backdrop for the game's narrative and challenges.
+- Insight into the Enigma machine's mechanics and history was primarily drawn from Wikipedia's comprehensive article, youtube, providing an authentic backdrop for the game's narrative and challenges.
 
 - Advanced object-oriented programming concepts were reinforced through Real Python tutorials, which aided in structuring the game's code effectively.
 
@@ -320,16 +417,4 @@ After making changes to your local copy, you can commit and push them to GitHub:
 
 [Back to Top ^](#introduction)
 
-Install py-enigma
-
-pip3 install py-enigma
-
 pip3 freeze > requirements.txt
-
-enigma information:
-https://de.wikipedia.org/wiki/Enigma_I?oldformat=true
-https://www.youtube.com/watch?v=ybkkiGtJmkM
-https://en.wikipedia.org/wiki/Cryptanalysis_of_the_Enigma
-
-riddlers:
-https://www.toppr.com/ask/
