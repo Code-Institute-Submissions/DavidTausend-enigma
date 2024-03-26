@@ -87,6 +87,7 @@ challenges = {
     ]
 }
 
+
 def print_enigma_logo():
     logo = """
     ███████╗███╗   ██╗██╗ ██████╗ ███╗   ███╗ █████╗ 
@@ -98,11 +99,11 @@ def print_enigma_logo():
     """
     print(logo)
 
+
 def menu():
     """
     Main menu
     """
-    clear_screen()
 
     # https://stackoverflow.com/questions/19964603/creating-a-menu-in-python
     while True:
