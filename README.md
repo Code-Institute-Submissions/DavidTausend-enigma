@@ -262,7 +262,7 @@ Ensure the game is optimized for mobile devices, allowing players to enjoy the g
 
 [PEP](https://pep8ci.herokuapp.com/): Tool for checking Python code against PEP 8 standards.
 
-[Toppr](https://www.toppr.com/ask/):
+[Toppr](https://www.toppr.com/ask/): An educational platform that offers a wide range of learning resources, including articles, questions, and answers across various subjects, which was instrumental in formulating logical and engaging challenges for the game.
 
 ## Deployment & Local Development
 
@@ -370,6 +370,17 @@ For Python code, PEP8 compliance was ensured using tools like flake8 or pycodest
 | Email Decryption         | Players use hints to decrypt an email containing a secret mission.           | Use given hints to decrypt an email.              | Email is decrypted successfully, revealing the mission. | Pass ✅ |
 | Time Tracking            | Game tracks the total time taken for challenges and displays it at the end. | Complete all challenges and observe the total time. | Time is accurately recorded and displayed.        | Pass ✅    |
 
+#### Error Handling Testing
+
+| Error Scenario                     | Expected Outcome                                                         | Testing Performed                                                  | Result                                            | Pass/Fail  |
+|------------------------------------|--------------------------------------------------------------------------|--------------------------------------------------------------------|---------------------------------------------------|------------|
+| Invalid age input                  | Game prevents progress and prompts for correct age input.                | Enter non-numeric and underage values for age.                     | Non-numeric/underage inputs are rejected with a prompt for re-entry. | Pass ✅    |
+| Invalid username input             | Game requests a valid username, only accepting alphabetical characters. | Enter usernames with numbers and special characters.               | Invalid usernames are rejected with a request for a valid one.    | Pass ✅    |
+| Incorrect answers in challenges    | Game allows limited attempts and provides hints.                        | Provide incorrect answers to challenges.                           | Incorrect attempts are counted, and hints are provided after failures. | Pass ✅    |
+| Navigation to non-existent menu option | Game remains in the current state, showing an error message.           | Try to select an option outside the available menu range.          | Error message displayed, and the game does not crash.             | Pass ✅    |
+| Interruption during gameplay       | Game handles unexpected exits gracefully.                               | Close the game window or terminal abruptly.                        | Game closes without corrupting data or causing errors.             | Pass ✅    |
+| Encryption/Decryption with incorrect settings | The game informs the player of incorrect settings.                   | Try to encrypt/decrypt with wrong Enigma settings.                 | Game notifies the player about the incorrect settings and does not proceed. | Pass ✅    |
+| Overflow in challenge time tracking | The game continues to track time without overflow errors.             | Engage in a challenge for an extended period.                       | Time tracking continues accurately without causing overflow errors. | Pass ✅    |
 
 <br>
 

@@ -91,8 +91,8 @@ challenges = {
 def print_enigma_logo():
     logo = """
     ███████╗███╗   ██╗██╗ ██████╗ ███╗   ███╗ █████╗ 
-    ██╔════╝████╗  ██║██║██╔═══██╗████╗ ████║██╔══██╗
-    █████╗  ██╔██╗ ██║██║██║   ██║██╔████╔██║███████║
+    ██╔════╝████╗  ██║██║██╔═════╗████╗ ████║██╔══██╗
+    █████╗  ██╔██╗ ██║██║██║ ████║██╔████╔██║███████║
     ██╔══╝  ██║╚██╗██║██║██║   ██║██║╚██╔╝██║██╔══██║
     ███████╗██║ ╚████║██║╚██████╔╝██║ ╚═╝ ██║██║  ██║
     ╚══════╝╚═╝  ╚═══╝╚═╝ ╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝
@@ -104,7 +104,6 @@ def menu():
     """
     Main menu
     """
-
     # https://stackoverflow.com/questions/19964603/creating-a-menu-in-python
     while True:
         console.print("Main Menu:", style="bold blue underline")
@@ -267,7 +266,7 @@ def user():
     while True:
         user_name = input(
             "\nEnter your name to embark on a thrilling adventure "
-            "filled with mystery and intrigue: "
+            "filled with mystery\nand intrigue: "
         ).strip()
         if user_name and user_name.replace(" ", "").isalpha():
             break
