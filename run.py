@@ -90,7 +90,7 @@ challenges = {
 
 def print_enigma_logo():
     logo = """
-    ███████╗███╗   ██╗██╗ ██████╗ ███╗   ███╗ █████╗ 
+    ███████╗███╗   ██╗██╗ ██████╗ ███╗   ███╗ █████╗
     ██╔════╝████╗  ██║██║██╔═════╗████╗ ████║██╔══██╗
     █████╗  ██╔██╗ ██║██║██║ ████║██╔████╔██║███████║
     ██╔══╝  ██║╚██╗██║██║██║   ██║██║╚██╔╝██║██╔══██║
@@ -194,6 +194,9 @@ def instructions():
     console.print(
         "\nGood luck, agent! The fate of the world rests in your hands.\n"
     )
+    console.print("\nPress enter to return to the main menu.")
+    input()
+    menu()
 
 
 def about():
@@ -281,8 +284,8 @@ def user():
         else:
             console.print(
                 "Invalid name. Please enter a name using alphabetic characters"
-                " only, without numbers or special characters, and ensure it is"
-                " no more than 15 characters long.", style="bold red"
+                " only, without numbers or special characters, and ensure it "
+                "is no more than 15 characters long.", style="bold red"
             )
 
     introduction_to_enigma()
@@ -294,7 +297,7 @@ def user():
 
     # Rotor Position Challenge
     rotor_time, rotor_positions = rotor_position_challenge()
-    total_time += rotor_time 
+    total_time += rotor_time
     if rotor_positions is None:
         console.print(
             "Failed to obtain rotor positions. "
@@ -316,7 +319,7 @@ def user():
 
     # Plugboard Challenge
     plugboard_time, plugboard_hint = plugboard_challenge()
-    total_time += plugboard_time 
+    total_time += plugboard_time
     if plugboard_hint:
         total_time += plugboard_time
     else:
@@ -406,7 +409,10 @@ def display_time(times):
     table = Table(show_header=True, header_style="bold magenta")
     table.add_column("Challenge", style="dim")
     table.add_column("Time Taken (seconds)", justify="right")
-    for challenge, time_taken in times.items():table.add_row(challenge, f"{time_taken:.2f}")
+    for challenge, time_taken in times.items():
+        table.add_row(
+            challenge,
+            f"{time_taken:.2f}")
     console.print(table)
 
 
@@ -793,7 +799,7 @@ def decrypt_email(
         )
         ring_settings_input = input(
             f"Enter the ring settings as three numbers separated "
-            f"by spaces (Hint: {formatted_hint}): "
+            f"by spaces\n (Hint: {formatted_hint}): "
         )
         if "  " in ring_settings_input or not ring_settings_input.strip():
             console.print(
@@ -825,7 +831,7 @@ def decrypt_email(
     while True:
         plugboard_settings = input(
             f"Enter the plugboard settings as pairs of letters separated by "
-            f"spaces (Hint: "
+            f"spaces\n (Hint: "
             f"{plugboard_hint if plugboard_hint else 'No hint'}): "
             )
         if "  " in plugboard_settings or not plugboard_settings.strip():

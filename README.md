@@ -34,13 +34,20 @@
   * [Instructions](#instructions)
   * [About](#about)
   * [Exit](#exit)
+  * [Age Verification](#age-verification)
+  * [User Name Input](#user-name-input)
   * [Challenges](#challenges)
+  * [Historical Missions](#historical-missions)
+    + [Rotor Position Challenge](#rotor-position-challenge)
+    + [Ring Setting Challenge](#ring-setting-challenge)
+    + [Plugboard Setting Challenge](#plugboard-setting-challenge)
   * [Encryption](#encryption)
+  * [Email Decryption](#email-decryption)
+  * [Time Tracking](#time-tracking)
   * [Future Implementations](#future-implementations)
     + [Additional Levels and Difficulty Settings](#additional-levels-and-difficulty-settings)
     + [Enhanced User Interface](#enhanced-user-interface)
     + [Multiplayer Mode](#multiplayer-mode)
-    + [Historical Missions](#historical-missions)
     + [Learning Mode](#learning-mode)
     + [Mobile Compatibility](#mobile-compatibility)
   * [Programming Languages](#programming-languages)
@@ -60,6 +67,7 @@
   * [Manual testing](#manual-testing)
     + [User Stories Testing](#user-stories-testing)
     + [Feature Testing](#feature-testing)
+    + [Error Handling Testing](#error-handling-testing)
   * [Bugs](#bugs)
     + [Known Bugs](#known-bugs)
     + [Solved Bugs](#solved-bugs)
@@ -149,15 +157,19 @@ Flowchart Visualization:
 
 ### Menu
 
-<img src="assets/images/readme/features/">
+<img src="assets/images/readme/features/menu.webp">
 
 The main menu offers easy navigation to various sections like Instructions, About, Challenges, and Exit
 
 ### Instructions
 
+<img src="assets/images/readme/features/instructions.webp">
+
 A section providing a step-by-step guide on using the Enigma simulator.
 
 ### About
+
+<img src="assets/images/readme/features/about.webp">
 
 Details the historical background of the Enigma machine and its significance.
 
