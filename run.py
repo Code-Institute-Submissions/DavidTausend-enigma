@@ -248,33 +248,41 @@ def user():
     # Age Verification
     while True:
         user_age = input("\nPlease enter your age to start the game: ")
-        if user_age.isdigit() and int(user_age) >= 18:
-            break
-        elif user_age.isdigit() and int(user_age) < 18:
-            console.print(
-                "You are too young to risk your life, "
-                "wait until you are older.\n", style="bold red"
-                )
-            return
+        if user_age.isdigit():
+            user_age = int(user_age)
+            if 18 <= user_age <= 100:
+                break
+            elif user_age < 18:
+                console.print(
+                    "You are too young to risk your life, "
+                    "wait until you are older.\n", style="bold red"
+                    )
+                return
+            else:
+                console.print(
+                    "Invalid input. Please enter a valid number "
+                    "for age.", style="bold red"
+                    )
         else:
             console.print(
-                "Invalid input. Please enter a valid number "
-                "for age.", style="bold red"
-                )
+                "Invalid input. Please enter a valid "
+                "number for age.", style="bold red"
+            )
 
     # Name Input
     while True:
         user_name = input(
             "\nEnter your name to embark on a thrilling adventure "
-            "filled with mystery\nand intrigue: "
+            "filled with mystery\nand intrigue (Max 15 characters): "
         ).strip()
-        if user_name and user_name.replace(" ", "").isalpha():
+
+        if 0 < len(user_name) <= 15 and user_name.replace(" ", "").isalpha():
             break
         else:
             console.print(
                 "Invalid name. Please enter a name using alphabetic characters"
-                " only, without numbers or special "
-                "characters.", style="bold red"
+                " only, without numbers or special characters, and ensure it is"
+                " no more than 15 characters long.", style="bold red"
             )
 
     introduction_to_enigma()

@@ -388,7 +388,19 @@ For Python code, PEP8 compliance was ensured using tools like flake8 or pycodest
 
 #### Known Bugs
 
+| Bug Description                              | Impact                                                     | Status    |
+|----------------------------------------------|------------------------------------------------------------|-----------|
+| Delay in loading the game on older hardware. | May cause a slight delay in starting the game for some users on older systems. | Identified, optimization planned for future updates. |
+| Visual glitches in terminal on some OS.      | Minor display issues in certain terminal emulators, not affecting gameplay. | Identified, under investigation for a workaround. |
+
 #### Solved Bugs
+
+| Bug Description                              | Solution Implemented                                       | Result    |
+|----------------------------------------------|------------------------------------------------------------|-----------|
+| User input not properly validated in some cases. | Enhanced input validation checks across the game.         | User inputs are now robustly validated, preventing unexpected behavior. |
+| Game crash when entering extremely long usernames. | Set a character limit for username input.                  | Prevents game crashes by restricting the username length. |
+| Incorrect rotor positions causing decryption errors. | Implemented additional hints and feedback for incorrect settings. | Players now receive clearer guidance, reducing decryption errors. |
+| Plugboard settings not recognized in certain formats. | Standardized plugboard input format and added user guidance. | Consistency in plugboard settings input, improving user experience. |
 
 ## Credits
 
