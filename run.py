@@ -286,12 +286,17 @@ def user():
 
     # Rotor Position Challenge
     rotor_time, rotor_positions = rotor_position_challenge()
+    total_time += rotor_time 
     if rotor_positions is None:
-        console.print("Failed to obtain rotor positions. Cannot proceed.")
+        console.print(
+            "Failed to obtain rotor positions. "
+            "Cannot proceed with email encryption."
+        )
         return
 
     # Ring Setting Challenge
     ring_time, ring_hint = ring_setting_challenge()
+    total_time += ring_time
     if ring_hint:
         total_time += ring_time
     else:
@@ -303,6 +308,7 @@ def user():
 
     # Plugboard Challenge
     plugboard_time, plugboard_hint = plugboard_challenge()
+    total_time += plugboard_time 
     if plugboard_hint:
         total_time += plugboard_time
     else:
@@ -332,9 +338,12 @@ def user():
     # Display total time taken for all challenges at the end
     console.print(
         Panel(f"Total time taken for all challenges:"
-              " [bold]{total_time:.2f} seconds[/bold]",
+              f"[bold]{total_time:.2f} seconds[/bold]",
               title="Challenge Time Summary", style="bold blue")
     )
+
+    input("\nPress enter to go to main menu")
+    clear_screen()
 
 
 def introduction_to_enigma():
@@ -389,8 +398,7 @@ def display_time(times):
     table = Table(show_header=True, header_style="bold magenta")
     table.add_column("Challenge", style="dim")
     table.add_column("Time Taken (seconds)", justify="right")
-    for challenge, time_taken in times.items():
-        table.add_row(challenge, f"{time_taken:.2f}")
+    for challenge, time_taken in times.items():table.add_row(challenge, f"{time_taken:.2f}")
     console.print(table)
 
 
@@ -661,6 +669,7 @@ def plugboard_challenge():
         f"The correct answer was "
         f"'{challenge['text_solution']}'.", style="bold red"
     )
+
     return end_time - start_time, None
 
 
