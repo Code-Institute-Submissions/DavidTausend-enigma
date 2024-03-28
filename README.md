@@ -123,7 +123,7 @@ This design strategy aims to merge the thematic elements of your project with co
 
 ### Wireframes
 
-<img src="assets/images/readme/features/wireframe.webp">
+<div align="center"><img src="assets/images/readme/features/wireframe.webp"></div>
 
 Wireframes are crucial in planning the layout and user flow of the "Enigma" game. They provide a visual representation of the game's structure, ensuring that all elements are logically arranged and accessible to the user. 
 
@@ -151,25 +151,25 @@ Flowchart Overview:
 
 Flowchart Visualization:
 
-<img src="assets/images/readme/features/flowchart.webp">
+<div align="center"><img src="assets/images/readme/features/flowchart.webp"></div>
 
 ## Features
 
 ### Menu
 
-<img src="assets/images/readme/features/menu.webp">
+<div align="center"><img src="assets/images/readme/features/menu.webp"></div>
 
 The main menu offers easy navigation to various sections like Instructions, About, Challenges, and Exit
 
 ### Instructions
 
-<img src="assets/images/readme/features/instructions.webp">
+<div align="center"><img src="assets/images/readme/features/instructions.webp"></div>
 
 A section providing a step-by-step guide on using the Enigma simulator.
 
 ### About
 
-<img src="assets/images/readme/features/about.webp">
+<div align="center"><img src="assets/images/readme/features/about.webp"></div>
 
 Details the historical background of the Enigma machine and its significance.
 
@@ -331,6 +331,8 @@ After making changes to your local copy, you can commit and push them to GitHub:
 #### Validator Testing
 
 ##### HTML Validation
+
+<div align="center"><img src="assets/images/readme/testing/"></div>
 
 Utilized the W3C Markup Validation Service to verify the structure and syntax of the HTML content. This step helped identify and rectify markup errors or inconsistencies to ensure web standards compliance.
 

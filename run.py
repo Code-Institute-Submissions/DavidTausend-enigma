@@ -799,7 +799,7 @@ def decrypt_email(
         )
         ring_settings_input = input(
             f"Enter the ring settings as three numbers separated "
-            f"by spaces\n (Hint: {formatted_hint}): "
+            f"by spaces\n(Hint: {formatted_hint}): "
         )
         if "  " in ring_settings_input or not ring_settings_input.strip():
             console.print(
@@ -831,7 +831,7 @@ def decrypt_email(
     while True:
         plugboard_settings = input(
             f"Enter the plugboard settings as pairs of letters separated by "
-            f"spaces\n (Hint: "
+            f"spaces\n(Hint: "
             f"{plugboard_hint if plugboard_hint else 'No hint'}): "
             )
         if "  " in plugboard_settings or not plugboard_settings.strip():
