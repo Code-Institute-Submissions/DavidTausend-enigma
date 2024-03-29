@@ -175,13 +175,19 @@ Details the historical background of the Enigma machine and its significance.
 
 ### Exit
 
+<div align="center"><img src="assets/images/readme/features/exit.webp"></div>
+
 Allows users to easily exit the program with options.
 
 ### Age Verification
 
+<div align="center"><img src="assets/images/readme/features/age.webp"></div>
+
 A prompt that ensures players meet the minimum age requirement, enhancing responsible gameplay.
 
 ### User Name Input
+
+<div align="center"><img src="assets/images/readme/features/name.webp"></div>
 
 Allows players to enter their names, personalizing the game experience.
 
@@ -214,6 +220,8 @@ The simulator enables users to encrypt and decrypt messages, experimenting with 
 A feature where players receive an encrypted email within the game, which they must decrypt using the hints obtained from challenges, tying together the skills practiced in previous tasks.
 
 ### Time Tracking
+
+<div align="center"><img src="assets/images/readme/features/time.webp"></div>
 
 The game tracks the time taken to complete challenges, adding a competitive element and encouraging players to improve their decryption speed.
 
