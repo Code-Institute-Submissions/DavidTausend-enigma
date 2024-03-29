@@ -1,19 +1,6 @@
-from rich.console import Console
-
-console = Console()
-
-
-def print_enigma_logo():
-    logo = """
-    ███████╗███╗   ██╗██╗ ██████╗ ███╗   ███╗ █████╗
-    ██╔════╝████╗  ██║██║██╔═════╗████╗ ████║██╔══██╗
-    █████╗  ██╔██╗ ██║██║██║ ████║██╔████╔██║███████║
-    ██╔══╝  ██║╚██╗██║██║██║   ██║██║╚██╔╝██║██╔══██║
-    ███████╗██║ ╚████║██║╚██████╔╝██║ ╚═╝ ██║██║  ██║
-    ╚══════╝╚═╝  ╚═══╝╚═╝ ╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝
-    """
-    print(logo)
-    print("\nWelcome to the Enigma game\n")
+from enig.logo import console
+from enig.user import user
+from enig.util import clear_screen
 
 
 def instructions():
@@ -83,6 +70,7 @@ def instructions():
     )
     console.print("\nPress enter to return to the main menu.")
     input()
+    clear_screen()
     menu()
 
 
@@ -123,4 +111,33 @@ def about():
     )
     console.print("\nPress enter to return to the main menu.")
     input()
+    clear_screen()
     menu()
+
+
+def menu():
+    """
+    Main menu
+    """
+    while True:
+        console.print("Main Menu:", style="bold blue underline")
+        options = ["1. Start Game", "2. Instructions", "3. About", "4. Exit"]
+        for option in options:
+            console.print(option, style="bold yellow")
+
+        choice = input("\nEnter your choice (1-4): ")
+
+        if choice == "1":
+            user()
+        elif choice == "2":
+            instructions()
+        elif choice == "3":
+            about()
+        elif choice == "4":
+            console.print("\nExiting the game. Goodbye!\n", style="bold red")
+            break
+        else:
+            console.print(
+                "Invalid choice. Please select a valid option from the menu.",
+                style="bold red"
+            )

@@ -1,4 +1,6 @@
 from enigma.machine import EnigmaMachine
+from enig.util import clear_screen
+
 
 def setup_enigma_machine(ring_settings):
     """
@@ -6,8 +8,6 @@ def setup_enigma_machine(ring_settings):
     """
     clear_screen()
 
-    # https://pypi.org/project/py-enigma/
-    # Set up Enigma Machine with some initial settings
     machine = EnigmaMachine.from_key_sheet(
         rotors='II IV V',
         reflector='B',

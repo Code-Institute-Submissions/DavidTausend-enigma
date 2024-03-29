@@ -1,81 +1,9 @@
 import time
+import random
 from rich.table import Table
-from enigma.util import get_random_challenge, clear_screen, console
-from enigma.enigma_setup import setup_enigma_machine
-
-challenges = {
-    "rotor_position": [
-        {
-            "challenge": "Decrypt 'LXF' to find the initial rotor positions.",
-            "hint": "It's a famous three-letter agency.",
-            "solution": "FBI"
-         },
-        {
-            "challenge": "Decrypt 'UGM' to find the initial rotor positions.",
-            "hint": "A precious yellow metal (3 Letters).",
-            "solution": "GLD"
-         }
-    ],
-    "ring_setting": [
-        {
-            "challenge": (
-                "I am always hungry, I must always be fed. "
-                "The finger I touch will soon turn red. What am I?"
-            ),
-            "hint":  (
-                "I can be found in every home and am essential for cooking, "
-                "but be careful not to get too close."
-            ),
-            "text_solution": "fire",
-            "solution": [5, 18, 21]
-        },
-        {
-            "challenge": (
-                "I speak without a mouth and hear without ears. "
-                "I have no body, but I come alive with wind. What am I?"
-            ),
-            "hint": "Think about communication devices.",
-            "text_solution": "echo",
-            "solution": [0, 5, 19]
-        },
-        {
-            "challenge": (
-             "The more of this there is, the less you see. What is it?"
-             ),
-            "hint": "It's essential for life but can be dangerous in excess.",
-            "text_solution": "darkness",
-            "solution": [22, 1, 6]
-        }
-      ],
-    "plugboard_setting": [
-        {
-            "challenge": (
-                    "What 5-letter word becomes "
-                    "shorter when you add two letters to it?"
-                ),
-            "hint": "It's not about length but semantics.",
-            "text_solution": "short",
-            "solution": "AD FG"
-        },
-        {
-            "challenge":  (
-                    "I speak without a mouth and hear without ears. "
-                    "I have no body, but I come alive with wind. What am I?"
-                ),
-            "hint": "Often heard but not seen.",
-            "text_solution": "echo",
-            "solution": "EH CO"
-        },
-        {
-            "challenge": (
-                "Forward I am heavy, but backward I am not. What am I?"
-                ),
-            "hint": "Think about direction and weight.",
-            "text_solution": "ton",
-            "solution": "TN ON"
-        }
-    ]
-}
+from rich.panel import Panel
+from enig.util import get_random_challenge, clear_screen, console
+from enig.enigma_setup import setup_enigma_machine
 
 
 def story_challenge():
@@ -178,8 +106,6 @@ def generate_email(user_name, ring_settings, rotor_positions):
     """
     Generates a random email with encrypted parts.
     """
-    # https://www.w3schools.com/python/ref_random_choice.asp
-    # https://numpy.org/doc/stable/reference/random/generated/numpy.random.choice.html
     domains = [
         "gmail.com", "yahoo.com", "hotmail.com",
         "gmx.com", "outlook.com", "codeinstitute.net"
@@ -194,7 +120,6 @@ def generate_email(user_name, ring_settings, rotor_positions):
         f"Hello {user_name} congratulations you completed your mission"
     )
 
-    # Set up the Enigma machine for the email
     enigma = setup_enigma_machine(ring_settings)
     enigma.set_display(rotor_positions)
     encrypted_message = (
@@ -222,8 +147,6 @@ def rotor_position_challenge():
     console.print(f"Hint: {challenge['hint']}", style="bold yellow")
 
     attempts, max_attempts = 0, 3
-
-    # Start the timer
     start_time = time.time()
 
     while attempts < max_attempts:
@@ -236,7 +159,6 @@ def rotor_position_challenge():
             continue
         if answer == challenge["solution"]:
 
-            # Stop timer and calculate duration
             end_time = time.time()
             console.print(
                 f"Correct! Time taken: "
@@ -253,7 +175,6 @@ def rotor_position_challenge():
             style="bold red"
         )
 
-    # Stop timer and calculate duration if max attempts reached
     end_time = time.time()
     console.print(
         f"Unfortunately, you didn't get the correct answer. "
@@ -280,8 +201,6 @@ def ring_setting_challenge():
     )
 
     attempts, max_attempts = 0, 3
-
-    # Start the timer
     start_time = time.time()
 
     while attempts < max_attempts:
@@ -295,7 +214,6 @@ def ring_setting_challenge():
 
         if answer == challenge["text_solution"]:
 
-            # Stop timer and calculate duration
             end_time = time.time()
             console.print(
                 f"Correct! Time taken: "
@@ -311,7 +229,6 @@ def ring_setting_challenge():
             style="bold red"
         )
 
-    # Stop timer and calculate duration if max attempts reached
     end_time = time.time()
     console.print(
         f"Time taken: {end_time - start_time:.2f} seconds", style="bold red"
@@ -373,6 +290,7 @@ def plugboard_challenge():
     )
 
     return end_time - start_time, None
+
 
 def email(user_name, ring_settings, rotor_positions):
     """

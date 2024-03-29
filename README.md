@@ -332,6 +332,7 @@ After making changes to your local copy, you can commit and push them to GitHub:
 4. Use `git commit -m "Your commit message here"` to commit your changes with a descriptive message.
 5. Use `git push origin main` to push your changes to the main branch on GitHub.
 
+
 ## Testing
 
 ### Automated Testing
@@ -340,17 +341,36 @@ After making changes to your local copy, you can commit and push them to GitHub:
 
 ##### HTML Validation
 
-<div align="center"><img src="assets/images/readme/testing/"></div>
+<div align="center"><img src="assets/images/readme/testing/html.webp"></div>
 
 Utilized the W3C Markup Validation Service to verify the structure and syntax of the HTML content. This step helped identify and rectify markup errors or inconsistencies to ensure web standards compliance.
+
 
 ##### CSS Validation
 
 The W3C CSS Validation Service was used to check the styling sheets. This process helped in spotting any CSS issues or deviations from the CSS standards, ensuring the styling is robust and cross-browser compatible.
 
+
 ##### PEP8 Validation
 
 For Python code, PEP8 compliance was ensured using tools like flake8 or pycodestyle. This adherence to the Python community's style guide guarantees that the code is readable, maintainable, and follows the conventions understood by a broad base of Python developers.
+
+<div align="center"><img src="assets/images/readme/testing/challenges.webp"></div>
+
+<div align="center"><img src="assets/images/readme/testing/enigma_setup.webp"></div>
+
+<div align="center"><img src="assets/images/readme/testing/logo.webp"></div>
+
+<div align="center"><img src="assets/images/readme/testing/menu.webp"></div>
+
+<div align="center"><img src="assets/images/readme/testing/run.webp"></div>
+
+<div align="center"><img src="assets/images/readme/testing/start.webp"></div>
+
+<div align="center"><img src="assets/images/readme/testing/user.webp"></div>
+
+<div align="center"><img src="assets/images/readme/testing/util.webp"></div>
+
 
 ### Manual testing
 

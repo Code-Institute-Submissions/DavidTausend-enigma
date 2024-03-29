@@ -1,12 +1,52 @@
-from enigma.ui import print_enigma_logo, console
-from enigma.challenges import (
-    rotor_position_challenge, 
-    ring_setting_challenge, 
-    plugboard_challenge, 
-    email, 
-    decrypt_email
+from rich.panel import Panel
+from enig.util import clear_screen, console
+from enig.challenges import (
+    story_challenge, enigma_key_challenge, rotor_position_challenge,
+    ring_setting_challenge, plugboard_challenge, email, decrypt_email
 )
-from enigma.enigma_setup import setup_enigma_machine
+
+
+def introduction_to_enigma():
+    """
+    Introduction to the Enigma machine and the game's challenges.
+    """
+    clear_screen()
+    console.print(
+        "[bold magenta]Welcome to The Enigma Adventure!"
+        "[/bold magenta]\n", justify="center"
+    )
+
+    intro_text = (
+        "The Enigma machine, a marvel of early 20th-century technology,"
+        " was a sophisticated device used for encrypting and "
+        "decrypting secret messages. Originally developed for commercial use,"
+        " it was famously adopted by the military forces "
+        "of several nations, most notably by Nazi Germany before and during "
+        "World War II. The complexity of its encryption "
+        "mechanism, which involved a series of rotors and a plugboard, "
+        "made it incredibly difficult for intercepted messages "
+        "to be deciphered, thus changing the course of espionage"
+        " and secret communications.\n\n"
+
+        "In this adventure, you'll step into the shoes of a cryptanalyst "
+        "faced with the monumental task of cracking the "
+        "Enigma's codes. Through a series of challenges, you'll learn "
+        "about the components and operations of the Enigma machine, "
+        "piece together its settings, and ultimately decrypt a secret "
+        "message that could alter the outcome of a great conflict. "
+        "Each challenge is designed to test your problem-solving skills and "
+        "give you a glimpse into the world of historical cryptography.\n\n"
+
+        "Prepare yourself for a journey into the shadows of secret messages,"
+        " where intuition, logic, and a keen eye for detail "
+        "will be your best tools. The fate of nations could rest on your "
+        "ability to understand and operate the enigmatic Enigma machine.\n"
+    )
+
+    console.print(intro_text, style="bold cyan")
+
+    input("Press enter to embark on your first challenge...")
+
 
 def user():
     """
@@ -124,54 +164,3 @@ def user():
 
     input("\nPress enter to go to main menu")
     clear_screen()
-
-
-def introduction_to_enigma():
-    """
-    Introduction to the Enigma machine and the game's challenges.
-    """
-    clear_screen()
-    console.print(
-        "[bold magenta]Welcome to The Enigma Adventure!"
-        "[/bold magenta]\n", justify="center"
-    )
-
-    intro_text = (
-        "The Enigma machine, a marvel of early 20th-century technology,"
-        " was a sophisticated device used for encrypting and "
-        "decrypting secret messages. Originally developed for commercial use,"
-        " it was famously adopted by the military forces "
-        "of several nations, most notably by Nazi Germany before and during "
-        "World War II. The complexity of its encryption "
-        "mechanism, which involved a series of rotors and a plugboard, "
-        "made it incredibly difficult for intercepted messages "
-        "to be deciphered, thus changing the course of espionage"
-        " and secret communications.\n\n"
-
-        "In this adventure, you'll step into the shoes of a cryptanalyst "
-        "faced with the monumental task of cracking the "
-        "Enigma's codes. Through a series of challenges, you'll learn "
-        "about the components and operations of the Enigma machine, "
-        "piece together its settings, and ultimately decrypt a secret "
-        "message that could alter the outcome of a great conflict. "
-        "Each challenge is designed to test your problem-solving skills and "
-        "give you a glimpse into the world of historical cryptography.\n\n"
-
-        "Prepare yourself for a journey into the shadows of secret messages,"
-        " where intuition, logic, and a keen eye for detail "
-        "will be your best tools. The fate of nations could rest on your "
-        "ability to understand and operate the enigmatic Enigma machine.\n"
-    )
-
-    console.print(intro_text, style="bold cyan")
-
-    input("Press enter to embark on your first challenge...")
-
-
-def run_game():
-    """
-    Run program functions.
-    """
-    clear_screen()
-    print_enigma_logo()
-    menu()
