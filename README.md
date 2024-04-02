@@ -355,20 +355,28 @@ The W3C CSS Validation Service was used to check the styling sheets. This proces
 
 For Python code, PEP8 compliance was ensured using tools like flake8 or pycodestyle. This adherence to the Python community's style guide guarantees that the code is readable, maintainable, and follows the conventions understood by a broad base of Python developers.
 
+`Challenges`
 <div align="center"><img src="assets/images/readme/testing/challenges.webp"></div>
 
+`Enigma Setup`
 <div align="center"><img src="assets/images/readme/testing/enigma_setup.webp"></div>
 
+`Logo`
 <div align="center"><img src="assets/images/readme/testing/logo.webp"></div>
 
+`Menu`
 <div align="center"><img src="assets/images/readme/testing/menu.webp"></div>
 
+`Run`
 <div align="center"><img src="assets/images/readme/testing/run.webp"></div>
 
+`Start`
 <div align="center"><img src="assets/images/readme/testing/start.webp"></div>
 
+`User`
 <div align="center"><img src="assets/images/readme/testing/user.webp"></div>
 
+`Util`
 <div align="center"><img src="assets/images/readme/testing/util.webp"></div>
 
 
@@ -481,5 +489,3 @@ For Python code, PEP8 compliance was ensured using tools like flake8 or pycodest
 - Family and Friends: A special thank you to my family and friends for their patience, support, and testing assistance, contributing to the refinement of the game's user experience.
 
 [Back to Top ^](#introduction)
-
-pip3 freeze > requirements.txt
